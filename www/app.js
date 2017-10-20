@@ -17411,7 +17411,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-369198c1", __vue__options__)
   } else {
-    hotAPI.reload("data-v-369198c1", __vue__options__)
+    hotAPI.rerender("data-v-369198c1", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],37:[function(require,module,exports){
@@ -17743,17 +17743,61 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"victor":28,"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],38:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-group {\n  position: absolute;\n  bottom: 25px;\n  right: 25px;\n}\n.nav-wrapper > p {\n  margin: 0 25px;\n}\n.label {\n  font-size: 2em;\n  font-weight: 300;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#remove {\n  z-index: 10000;\n}")
 ;(function(){
 
 
-module.exports = {};
+module.exports = {
+  props: ['image', 'gid'],
+  methods: {
+    removeGroup() {
+      this.$store.dispatch('removeGroup', this.gid);
+    }
+  }
+};
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"groups"}},[_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large waves-effect waves-light vk-color",attrs:{"id":"add-group"}},[_c('router-link',{attrs:{"to":'create'}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])],1)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper vk-color"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ваши привязанные группы:")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('p',{staticClass:"flow-text center-align"},[_vm._v("Пока ничего нет, начните работу с "),_c('b',[_vm._v("DonateLo")]),_vm._v(" просто привязав Вашу группу! Это просто!")])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card"},[_c('router-link',{attrs:{"to":{path: 'edit', query: {gid: _vm.gid}}}},[_c('div',{staticClass:"card-image waves-effect"},[_c('img',{attrs:{"src":_vm.image}})])]),_vm._v(" "),_c('div',{staticClass:"card-content"},[_c('span',{staticClass:"card-title activator grey-text text-darken-4"},[_vm._v("OXXXYMIRON OFFICIAL\n        "),_c('i',{staticClass:"material-icons right waves-effect",attrs:{"id":"remove"},on:{"click":_vm.removeGroup}},[_vm._v("close")])])])],1)}
+__vue__options__.staticRenderFns = []
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c1df6a46", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-c1df6a46", __vue__options__)
+  }
+})()}
+},{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],39:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-group {\n  position: fixed;\n  bottom: 25px;\n  right: 25px;\n}\n.nav-wrapper > p {\n  margin: 0 25px;\n}\n.container {\n  margin-top: 50px;\n}")
+;(function(){
+
+
+const Group = require('./Group.vue');
+
+module.exports = {
+  components: {
+    Group
+  },
+  computed: {
+    isShowGroups() {
+      return !!Object.keys(this.$store.state.groups).length;
+    },
+    groups() {
+      return this.$store.state.groups;
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"groups"}},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"container"},[(_vm.isShowGroups)?_c('div',{staticClass:"groups"},_vm._l((_vm.groups),function(item,key){return _c('group',{attrs:{"image":item,"gid":key}})})):_c('p',{staticClass:"flow-text center-align"},[_vm._v("Пока ничего нет, начните работу с "),_c('b',[_vm._v("DonateLo")]),_vm._v(" просто привязав Вашу группу! Это просто!")])]),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large waves-effect waves-light vk-color",attrs:{"id":"add-group"}},[_c('router-link',{attrs:{"to":'create'}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])],1)])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper vk-color"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ваши привязанные группы:")])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -17765,7 +17809,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-46a4b1e6", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],39:[function(require,module,exports){
+},{"./Group.vue":38,"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],40:[function(require,module,exports){
 'use strict';
 
 var Vue = require('vue');
@@ -17795,14 +17839,23 @@ new Vue({
 	store: new Vuex.Store(store)
 });
 
-},{"./components/App.vue":34,"./components/Constructor.vue":35,"./components/CreateGroup.vue":36,"./components/Groups.vue":38,"./store":40,"vue":31,"vue-router":30,"vuex":33}],40:[function(require,module,exports){
+},{"./components/App.vue":34,"./components/Constructor.vue":35,"./components/CreateGroup.vue":36,"./components/Groups.vue":39,"./store":41,"vue":31,"vue-router":30,"vuex":33}],41:[function(require,module,exports){
 'use strict';
 
 var axios = require('axios');
 
 module.exports = {
   state: {
-    groups: [],
+    groups: {
+      'oxxxyof': 'img/bg.jpg',
+      'oxxxyof1': 'img/bg.jpg',
+      'oxxxyof2': 'img/bg.jpg',
+      'oxxxyof3': 'img/bg.jpg',
+      'oxxxyof4': 'img/bg.jpg',
+      'oxxxyof5': 'img/bg.jpg',
+      'oxxxyof6': 'img/bg.jpg',
+      'oxxxyof7': 'img/bg.jpg'
+    },
     group: {},
     api: 'vk-donatelo.herokuapp.com'
   },
@@ -17812,34 +17865,44 @@ module.exports = {
     },
     setGroup: function setGroup(state, data) {
       state.group = data;
+    },
+    removeGroup: function removeGroup(state, gid) {
+      console.log(gid);
+      state.groups.$remove(gid);
     }
   },
   actions: {
     loadGroups: function loadGroups(_ref, uid) {
-      var state, resp;
+      var commit, resp;
       return Promise.resolve().then(function () {
-        state = _ref.state;
+        commit = _ref.commit;
         return axios.get(state.api + '/groups_list', { params: { uid: uid } });
       }).then(function (_resp) {
         resp = _resp;
 
-        state.commit('setGroups', resp.body);
+        commit('setGroups', resp.body);
       });
     },
     loadGroup: function loadGroup(_ref2, _ref3) {
-      var state, uid, gid, resp;
+      var commit, uid, gid, resp;
       return Promise.resolve().then(function () {
-        state = _ref2.state;
+        commit = _ref2.commit;
         uid = _ref3.uid;
         gid = _ref3.gid;
         return axios.get(state.api + '/group_info', { params: { gid: gid, uid: uid } });
       }).then(function (_resp) {
         resp = _resp;
 
-        state.commit('setGroup', resp.body);
+        commit('setGroup', resp.body);
       });
+    },
+    removeGroup: function removeGroup(_ref4, gid) {
+      var commit = _ref4.commit;
+
+      console.log(gid);
+      commit('removeGroup', gid);
     }
   }
 };
 
-},{"axios":1}]},{},[39]);
+},{"axios":1}]},{},[40]);
