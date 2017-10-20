@@ -1,0 +1,4 @@
+{
+  "plugins": ["async-to-promises", "transform-object-rest-spread"]
+}
+ 

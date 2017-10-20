@@ -41,7 +41,7 @@
     "vue-style-loader": "^3.0.3",
     "vueify": "^9.4.1"
   },
-  "author": "azbang, alxmamaev",
+  "author": "azbang",
   "license": "None",
   "homepage": "https://bitbucket.org/alxmamaev/donatelo#readme"
 }

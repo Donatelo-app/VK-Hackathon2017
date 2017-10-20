@@ -1,15 +1,27 @@
+const axios = require('axios');
+
 module.exports = {
   state: {
-    groups: []
+    groups: [],
+    group: {},
+    api: 'vk-donatelo.herokuapp.com'
   },
   commits: {
-    addGroups(state, data) {
-      state.$set('groups', data);
+    setGroups(state, data) {
+      state.groups = data;
+    },
+    setGroup(state, data) {
+      state.group = data;
     }
   },
-  getters: {
-    getGroup(state) {
-      
+  actions: {
+    async loadGroups({state}, uid) {
+      let resp = await axios.get(state.api + '/groups_list', {params: {uid}});
+      state.commit('setGroups', resp.body);
+    },
+    async loadGroup({state}, {uid, gid}) {
+      let resp = await axios.get(state.api + '/group_info', {params: {gid, uid}});
+      state.commit('setGroup', resp.body);
     }
   }
 }
