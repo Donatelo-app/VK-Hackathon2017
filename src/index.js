@@ -7,6 +7,7 @@ const store = require('./store')
 const App = require('./components/App.vue');
 const Constructor = require('./components/Constructor.vue');
 const Groups = require('./components/Groups.vue');
+const CreateGroup = require('./components/CreateGroup.vue');
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -16,6 +17,7 @@ var router = new VueRouter({
 		{path: '/', redirect: '/groups'},
 		{path: '/groups', component: Groups},
 		{path: '/edit', component: Constructor},
+		{path: '/create', component: CreateGroup}
 	]
 });
 
