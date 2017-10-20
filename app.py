@@ -1,9 +1,11 @@
 from flask import Flask, request
+from flask_cors import CORS
 from base import Base
 import json
 
 app = Flask(__name__)
-base = Base
+CORS(app)
+base = Base()
 
 
 @app.route("/groups_list")
@@ -31,7 +33,7 @@ def group_info():
 	return json.dumps(info), 200
 
 
-@app.route("/update_group")
+@app.route("/update_group", methods=["POST"])
 def update_group():
 	data = json.loads(request.data.decode("utf-8"))
 
@@ -40,7 +42,12 @@ def update_group():
 
 	info = data["info"]
 
+	group_list = base.get("%s:list" % user_id, default=[])
 	base.set("%s:%s:info" % (user_id, group_id), info)
+
+	group_list = base.get("%s:list" % user_id, default=[])
+	if group_id not in group_list: group_list.append(group_id)
+	base.set("%s:list" % user_id, group_list)
 
 	return "", 200
 
