@@ -13,9 +13,9 @@ module.exports = {
       'oxxxyof7': 'img/bg.jpg',
     },
     fonts: {
-      'Bebas': 'Bebas Uane',
-      'Roboto': 'Roboto Regular',
-      'Arial': 'Arial'
+      'BEBAS': 'Bebas Neue',
+      'ROBOTO': 'Roboto Regular',
+      'ARIAL': 'Arial'
     },
     bars: [
       {
@@ -35,9 +35,10 @@ module.exports = {
       }
     ],
     group: {},
+    gid: '51',
     api: 'vk-donatelo.herokuapp.com'
   },
-  commits: {
+  mutations: {
     setGroups(state, data) {
       state.groups = data;
     },
@@ -49,15 +50,20 @@ module.exports = {
     }
   },
   actions: {
-    async loadGroups({commit}, uid) {
-      let resp = await axios.get(state.api + '/groups_list', {params: {uid}});
+    async loadGroups({commit, state}) {
+      let resp = await axios.get(state.api + '/groups_list', {params: {uid: state.uid}});
       commit('setGroups', resp.body);
     },
-    async loadGroup({commit}, {uid, gid}) {
-      let resp = await axios.get(state.api + '/group_info', {params: {gid, uid}});
+    async loadGroup({commit, state}, gid) {
+      let resp = await axios.get(state.api + '/group_info', {params: {gid, uid: state.uid}});
       commit('setGroup', resp.body);
     },
-    removeGroup({commit}, gid) {
+    async uploadGroupData({comit, state}, data) {
+      data.uid = state.uid;
+      let resp = await axios.post(state.api + '/update_group', data);
+    },
+    async removeGroup({commit, state}, gid) {
+      let resp = await axios.post(state.api + '/remove_group', {gid, uid: state.uid});
       commit('removeGroup', gid);
     }
   }

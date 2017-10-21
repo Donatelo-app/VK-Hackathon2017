@@ -16013,51 +16013,61 @@ module.exports = {
       scale: 1
     };
   },
+  computed: {
+    data() {
+      return this.$store.state.group;
+    }
+  },
   methods: {
-    addTextNode() {
-      var iText = new fabric.IText('Ваш текст', {
-        left: 50,
-        top: 50,
-        fill: 'white',
-        fontFamily: 'Bebas Neue',
-        fontWeight: 'normal',
-        fontSize: 60,
+    addTextNode(e, data = {}) {
+      var iText = new fabric.IText(data.text || 'Введите текст', {
+        left: data.x != null ? date.x : 50,
+        top: data.y != null ? date.y : 50,
+        fill: data.color || 'white',
+        fontFamily: this.$store.state.fonts[data.font] || 'Bebas Neue',
+        fontSize: data.size || 60,
         padding: 7
       });
       iText.scale(this.scale);
       canvas.add(iText);
     },
-    addProgressBar(id) {
-      let data = this.$store.state.bars[0];
+    addProgressBar(e, data = {}) {
+      let br = data.border != null ? data.border : 0;
+      let w = data.w || 300;
+      let h = data.h || 40;
+      let x = data.x != null ? data.x + w / 2 : 50;
+      let y = data.y != null ? data.y + h / 2 : 50;
+      let stand_color = data.stand_color || '#CCCCCC';
+      let progress_color = data.progress_color || '#FFFFFF';
 
-      fabric.Image.fromURL(data.progress, stand => {
+      fabric.Image.fromURL(data.progress || 'img/bar.png', stand => {
         stand.selected = true;
-        stand.setWidth(data.w + data.border * 2);
-        stand.setHeight(data.h + data.border * 2);
-        stand.left -= data.border;
-        stand.top -= data.border;
+        stand.setWidth(w + br * 2);
+        stand.setHeight(h + br * 2);
+        stand.left -= -br;
+        stand.top -= -br;
         stand.scale(this.scale);
         var filter = new fabric.Image.filters.Tint({
-          color: data.stand_color,
+          color: stand_color,
           opacity: 1
         });
         stand.filters.push(filter);
         stand.applyFilters(canvas.renderAll.bind(canvas));
 
-        fabric.Image.fromURL(data.progress, progress => {
+        fabric.Image.fromURL(data.progress || 'img/bar.png', progress => {
           progress.scale(this.scale);
-          progress.setWidth(data.w / 2);
-          progress.setHeight(data.h);
+          progress.setWidth(w / 2);
+          progress.setHeight(h);
           var filter = new fabric.Image.filters.Tint({
-            color: data.progress_color,
+            color: progress_color,
             opacity: 1
           });
           progress.filters.push(filter);
           progress.applyFilters(canvas.renderAll.bind(canvas));
 
           var group = new fabric.Group([stand, progress], {
-            left: 100,
-            top: 25
+            left: x,
+            top: y
           });
           canvas.add(group);
         });
@@ -16096,7 +16106,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":30,"vue-hot-reload-api":28,"vueify/lib/insert-css":31}],35:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-wallpaper[data-v-369198c1] {\n  cursor: pointer;\n  height: 200px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 67px;\n  position: relative;\n  box-sizing: border-box;\n}\n#preview-image[data-v-369198c1] {\n  position: absolute;\n  width: 100vw;\n  height: 200px;\n  background-position: center;\n  background-size: cover;\n  z-index: 100;\n  top: -5px;\n  left: -5px;\n}\n#select-image[data-v-369198c1] {\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-wallpaper[data-v-369198c1] {\n  height: 300px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 110px;\n  position: relative;\n  box-sizing: border-box;\n}\n#add-wallpaper i[data-v-369198c1], #add-wallpaper p[data-v-369198c1] {\n  color: #7a9ee0;\n  margin-top: 0;\n  text-align: center;\n}\n#preview-image[data-v-369198c1] {\n  position: absolute;\n  width: 100vw;\n  height: 300px;\n  background-position: center;\n  background-size: cover;\n  z-index: 100;\n  top: -5px;\n  left: -5px;\n}\n#select-image[data-v-369198c1] {\n  cursor: pointer;\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n}\n\n.add-photo-icon[data-v-369198c1] {\n  font-size: 3em;\n}")
 ;(function(){
 
 
@@ -16111,11 +16121,17 @@ module.exports = {
   },
   methods: {
     createGroup() {
-      this.$store.dispatch('loadGroupData', {
-        bg: this.image,
-        acess_token: this.tokenGroup,
+      this.$store.commit('setGroup', {
         gid: this.groupId,
-        bitcoin_wallet: this.bitcoinWallet
+        info: {
+          cover: this.image,
+          token: this.tokenGroup,
+          bitcoin: this.bitcoin,
+          mastercard: this.mastercard,
+          tinkoff: this.tinkoff,
+          qiwi: this.tinkoff
+        },
+        views: []
       });
       this.$router.push('edit');
     },
@@ -16135,7 +16151,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"create-group"}},[_c('form',{on:{"submit":function($event){$event.preventDefault();_vm.createGroup($event)}}},[_c('div',{attrs:{"id":"add-wallpaper"}},[_c('div',{style:({backgroundImage: 'url(' + _vm.image + ')'}),attrs:{"id":"preview-image"}}),_vm._v(" "),_c('input',{attrs:{"type":"file","id":"select-image","required":""},on:{"change":_vm.onFileChange}}),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])]),_vm._v(" "),_vm._m(0)])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"create-group"}},[_c('form',{on:{"submit":function($event){$event.preventDefault();_vm.createGroup($event)}}},[_c('div',{attrs:{"id":"add-wallpaper"}},[_c('div',{style:({backgroundImage: 'url(' + _vm.image + ')'}),attrs:{"id":"preview-image"}}),_vm._v(" "),_c('input',{attrs:{"type":"file","id":"select-image","required":""},on:{"change":_vm.onFileChange}}),_vm._v(" "),_c('i',{staticClass:"material-icons add-photo-icon"},[_vm._v("add_a_photo")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])]),_vm._v(" "),_vm._m(0)])])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Укажите данные группы:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"gid","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"gid"}},[_vm._v("ID группы")])])]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"token","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"token"}},[_vm._v("Токен группу")])])]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Ваши реквезиты:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"bitcoin","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"token"}},[_vm._v("Биткоин кошелек")])])]),_vm._v(" "),_c('button',{staticClass:"col s12 waves-effect waves-light btn btn-large vk-color",attrs:{"type":"submit"}},[_c('i',{staticClass:"material-icons left"},[_vm._v("navigate_next")]),_vm._v("Перейти к редактированию")])])])}]
 __vue__options__._scopeId = "data-v-369198c1"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -16158,7 +16174,7 @@ module.exports = {
   props: ['image', 'gid'],
   methods: {
     removeGroup() {
-      this.$store.dispatch('removeGroup', this.gid);
+      this.$store.dispatch('removeGroup', { gid: this.gid });
     }
   }
 };
@@ -16166,7 +16182,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card"},[_c('router-link',{attrs:{"to":{path: 'edit', query: {gid: _vm.gid}}}},[_c('div',{staticClass:"card-image waves-effect"},[_c('img',{attrs:{"src":_vm.image}})])]),_vm._v(" "),_c('div',{staticClass:"card-content"},[_c('span',{staticClass:"card-title activator grey-text text-darken-4"},[_vm._v("OXXXYMIRON OFFICIAL\n        "),_c('i',{staticClass:"material-icons right waves-effect",attrs:{"id":"remove"},on:{"click":_vm.removeGroup}},[_vm._v("close")])])])],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card"},[_c('router-link',{attrs:{"to":'edit'}},[_c('div',{staticClass:"card-image waves-effect"},[_c('img',{attrs:{"src":_vm.image}})])]),_vm._v(" "),_c('div',{staticClass:"card-content"},[_c('span',{staticClass:"card-title activator grey-text text-darken-4"},[_vm._v("OXXXYMIRON OFFICIAL\n        "),_c('i',{staticClass:"material-icons right waves-effect",attrs:{"id":"remove"},on:{"click":_vm.removeGroup}},[_vm._v("close")])])])],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16192,7 +16208,7 @@ module.exports = {
   },
   computed: {
     isShowGroups() {
-      return !!Object.keys(this.$store.state.groups).length;
+      return !!Object.keys(this.groups).length;
     },
     groups() {
       return this.$store.state.groups;
@@ -16203,7 +16219,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"groups"}},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"container"},[(_vm.isShowGroups)?_c('div',{staticClass:"groups"},_vm._l((_vm.groups),function(item,key){return _c('group',{attrs:{"image":item,"gid":key}})})):_c('p',{staticClass:"flow-text center-align"},[_vm._v("Пока ничего нет, начните работу с "),_c('b',[_vm._v("DonateLo")]),_vm._v(" просто привязав Вашу группу! Это просто!")])]),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large waves-effect waves-light vk-color",attrs:{"id":"add-group"}},[_c('router-link',{attrs:{"to":'create'}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"groups"}},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"container"},[(_vm.isShowGroups)?_c('div',{staticClass:"groups"},_vm._l((_vm.groups),function(item,key){return _c('group',{attrs:{"image":item,"gid":key}})})):_c('p',{staticClass:"flow-text center-align"},[_vm._v("Пока ничего нет, начните работу с "),_c('b',[_vm._v("DonateLo")]),_vm._v(" просто привязав Вашу группу! Это просто!")])]),_vm._v(" "),_c('router-link',{staticClass:"btn-floating btn-large waves-effect waves-light vk-color",attrs:{"to":'create',"id":"add-group"}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])],1)}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper vk-color"},[_c('p',{staticClass:"flow-text"},[_vm._v("Ваши привязанные группы:")])])])}]
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16264,9 +16280,9 @@ module.exports = {
       'oxxxyof7': 'img/bg.jpg'
     },
     fonts: {
-      'Bebas': 'Bebas Uane',
-      'Roboto': 'Roboto Regular',
-      'Arial': 'Arial'
+      'BEBAS': 'Bebas Neue',
+      'ROBOTO': 'Roboto Regular',
+      'ARIAL': 'Arial'
     },
     bars: [{
       progress: 'img/bar.png',
@@ -16283,9 +16299,10 @@ module.exports = {
       h: 50
     }],
     group: {},
+    gid: '51',
     api: 'vk-donatelo.herokuapp.com'
   },
-  commits: {
+  mutations: {
     setGroups: function setGroups(state, data) {
       state.groups = data;
     },
@@ -16297,34 +16314,53 @@ module.exports = {
     }
   },
   actions: {
-    loadGroups: function loadGroups(_ref, uid) {
-      var commit, resp;
+    loadGroups: function loadGroups(_ref) {
+      var commit, state, resp;
       return Promise.resolve().then(function () {
         commit = _ref.commit;
-        return axios.get(state.api + '/groups_list', { params: { uid: uid } });
+        state = _ref.state;
+        return axios.get(state.api + '/groups_list', { params: { uid: state.uid } });
       }).then(function (_resp) {
         resp = _resp;
 
         commit('setGroups', resp.body);
       });
     },
-    loadGroup: function loadGroup(_ref2, _ref3) {
-      var commit, uid, gid, resp;
+    loadGroup: function loadGroup(_ref2, gid) {
+      var commit, state, resp;
       return Promise.resolve().then(function () {
         commit = _ref2.commit;
-        uid = _ref3.uid;
-        gid = _ref3.gid;
-        return axios.get(state.api + '/group_info', { params: { gid: gid, uid: uid } });
+        state = _ref2.state;
+        return axios.get(state.api + '/group_info', { params: { gid: gid, uid: state.uid } });
       }).then(function (_resp) {
         resp = _resp;
 
         commit('setGroup', resp.body);
       });
     },
-    removeGroup: function removeGroup(_ref4, gid) {
-      var commit = _ref4.commit;
+    uploadGroupData: function uploadGroupData(_ref3, data) {
+      var comit, state, resp;
+      return Promise.resolve().then(function () {
+        comit = _ref3.comit;
+        state = _ref3.state;
 
-      commit('removeGroup', gid);
+        data.uid = state.uid;
+        return axios.post(state.api + '/update_group', data);
+      }).then(function (_resp) {
+        resp = _resp;
+      });
+    },
+    removeGroup: function removeGroup(_ref4, gid) {
+      var commit, state, resp;
+      return Promise.resolve().then(function () {
+        commit = _ref4.commit;
+        state = _ref4.state;
+        return axios.post(state.api + '/remove_group', { gid: gid, uid: state.uid });
+      }).then(function (_resp) {
+        resp = _resp;
+
+        commit('removeGroup', gid);
+      });
     }
   }
 };

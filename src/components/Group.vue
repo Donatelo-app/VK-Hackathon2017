@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-      <router-link :to="{path: 'edit', query: {gid: gid}}">
+      <router-link :to="'edit'">
         <div class="card-image waves-effect">
           <img :src="image">
         </div>
@@ -18,7 +18,7 @@
     props: ['image', 'gid'],
     methods: {
       removeGroup() {
-        this.$store.dispatch('removeGroup', this.gid);
+        this.$store.dispatch('removeGroup', {gid: this.gid});
       }
     }
   }

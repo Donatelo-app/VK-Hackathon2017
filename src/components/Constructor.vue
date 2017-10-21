@@ -35,52 +35,62 @@
         scale: 1
       }
     },
+    computed: {
+      data() {
+        return this.$store.state.group;
+      }
+    },
     methods: {
-      addTextNode() {
-        var iText = new fabric.IText('Ваш текст', {
-          left: 50,
-          top: 50,
-          fill: 'white',
-          fontFamily: 'Bebas Neue',
-          fontWeight: 'normal',
-          fontSize: 60,
+      addTextNode(e, data = {}) {
+        var iText = new fabric.IText(data.text || 'Введите текст', {
+          left: data.x != null ? date.x : 50,
+          top: data.y != null ? date.y : 50,
+          fill: data.color || 'white',
+          fontFamily: this.$store.state.fonts[data.font] || 'Bebas Neue',
+          fontSize: data.size || 60,
           padding: 7
         });
         iText.scale(this.scale);
         canvas.add(iText);
       },
-      addProgressBar(id) {
-        let data = this.$store.state.bars[0];
+      addProgressBar(e, data = {}) {
+        let br = data.border != null ? data.border : 0;
+        let w = data.w || 300;
+        let h = data.h || 40;
+        let x = data.x != null ? data.x+w/2 : 50;
+        let y = data.y != null ? data.y+h/2 : 50;
+        let stand_color = data.stand_color || '#CCCCCC';
+        let progress_color = data.progress_color || '#FFFFFF';
 
-        fabric.Image.fromURL(data.progress, (stand) => {
+        fabric.Image.fromURL(data.progress || 'img/bar.png', (stand) => {
           stand.selected = true;
-          stand.setWidth(data.w+data.border*2);
-          stand.setHeight(data.h+data.border*2);
-          stand.left -= data.border;
-          stand.top -= data.border;
+          stand.setWidth(w+br*2);
+          stand.setHeight(h+br*2);
+          stand.left -= -br;
+          stand.top -= -br;
           stand.scale(this.scale);
           var filter = new fabric.Image.filters.Tint({
-            color: data.stand_color,
+            color: stand_color,
             opacity: 1
           });
           stand.filters.push(filter);
           stand.applyFilters(canvas.renderAll.bind(canvas));
 
 
-          fabric.Image.fromURL(data.progress, (progress) => {
+          fabric.Image.fromURL(data.progress || 'img/bar.png', (progress) => {
             progress.scale(this.scale);
-            progress.setWidth(data.w/2);
-            progress.setHeight(data.h);
+            progress.setWidth(w/2);
+            progress.setHeight(h);
             var filter = new fabric.Image.filters.Tint({
-              color: data.progress_color,
+              color: progress_color,
               opacity: 1
             });
             progress.filters.push(filter);
             progress.applyFilters(canvas.renderAll.bind(canvas));
 
             var group = new fabric.Group([stand, progress], {
-              left: 100,
-              top: 25,
+              left: x,
+              top: y,
             });
             canvas.add(group);
           });

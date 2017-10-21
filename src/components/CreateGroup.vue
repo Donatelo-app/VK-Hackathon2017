@@ -5,6 +5,8 @@
       <div id="add-wallpaper">
         <div id="preview-image" :style="{backgroundImage: 'url(' + image + ')'}"></div>
         <input type="file" id="select-image" @change="onFileChange" required>
+        <i class="material-icons add-photo-icon">add_a_photo</i>
+        <br>
         <p class="flow-text">Загрузите обложку группы</p>
       </div>
 
@@ -50,11 +52,17 @@
     },
     methods: {
       createGroup() {
-        this.$store.dispatch('loadGroupData', {
-          bg: this.image,
-          acess_token: this.tokenGroup,
+        this.$store.commit('setGroup', {
           gid: this.groupId,
-          bitcoin_wallet: this.bitcoinWallet
+          info: {
+            cover: this.image,
+            token: this.tokenGroup,
+            bitcoin: this.bitcoin,
+            mastercard: this.mastercard,
+            tinkoff: this.tinkoff,
+            qiwi: this.tinkoff
+          },
+          views: []
         });
         this.$router.push('edit');
       },
@@ -74,19 +82,23 @@
 
 <style scoped>
   #add-wallpaper {
-    cursor: pointer;
-    height: 200px;
+    height: 300px;
     border: 5px dashed #7a9ee0;
     width: 100%;
     text-align: center;
-    padding-top: 67px;
+    padding-top: 110px;
     position: relative;
     box-sizing: border-box;
+  }
+  #add-wallpaper i, #add-wallpaper p {
+    color: #7a9ee0;
+    margin-top: 0;
+    text-align: center;
   }
   #preview-image {
     position: absolute;
     width: 100vw;
-    height: 200px;
+    height: 300px;
     background-position: center;
     background-size: cover;
     z-index: 100;
@@ -94,6 +106,7 @@
     left: -5px;
   }
   #select-image {
+    cursor: pointer;
     opacity: 0;
     position: absolute;
     top: 0;
@@ -101,5 +114,9 @@
     width: 100%;
     height: 100%;
     z-index: 1000;
+  }
+
+  .add-photo-icon {
+    font-size: 3em;
   }
 </style>
