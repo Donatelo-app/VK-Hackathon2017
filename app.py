@@ -54,8 +54,8 @@ def update_group():
 
 
 	old_info = new_info
-	if "render_cover" not in old_info["info"]:
-		old_info["info"]["render_cover"] = old_info["info"]["cover"]["background"].decode()
+	if "render_cover" not in old_info:
+		old_info["render_cover"] = old_info["info"]["cover"]["background"].decode()
 
 	group_list = base.get("%s:list" % user_id, default=[])
 	base.set("%s:%s:info" % (user_id, group_id), old_info)
