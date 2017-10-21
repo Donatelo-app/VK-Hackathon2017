@@ -86,14 +86,14 @@ def update_heads():
 	groups_list = base.get("group-list", default=[])
 
 	for gid in groups_list:
+		info = base.get("%s:info" % gid, default={})
 
 		last_balance = base.get("%s:last_balance" % gid, default = -1)
 		cur_balance = get_balance(info["wallets"])
 		
-		if last_balance == cur_balance: continue
+		if last_balance - cur_balance<1: continue
 		base.set("%s:last_balance" % gid, cur_balance)
 
-		info = base.get("%s:info" % gid, default={})
 
 		cover = draw_cover(info["cover"], cur_balance)
 
