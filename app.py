@@ -54,6 +54,10 @@ def update_group():
 	if "base64," in new_info["cover"]["background"]:
 		new_info["cover"]["background"] = new_info["cover"]["background"].split("base64,")[1]
 
+	for i, view in enumerate(new_info["cover"]["views"]):
+		if "base64," in view["progress"]:
+			new_info["cover"]["views"][i]["progress"] = new_info["cover"]["views"][i]["progress"].split("base64,")[1]
+
 	old_info = base.get("%s:%s:info" % (user_id, group_id), default={})
 
 	if type(new_info) is not dict: return  "", 400
