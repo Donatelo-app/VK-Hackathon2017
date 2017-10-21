@@ -37,13 +37,13 @@ def draw_progress(progress, stand, precent, border):
     return stand
 
 
-def draw_text(image, text, font, size, point, collor_code="#FFFFFFFF"):
-    collor = ImageColor.getrgb(collor_code)
-    if len(collor)==3: collor = tuple(list(collor) + [255])
+def draw_text(image, text, font, size, point, color_code="#FFFFFFFF"):
+    color = ImageColor.getrgb(color_code)
+    if len(color)==3: color = tuple(list(color) + [255])
     
     fnt = ImageFont.truetype('./fonts/%s' % fonts[font], size)
     d = ImageDraw.Draw(image)
-    d.text(point, text, font=fnt, fill=collor)
+    d.text(point, text, font=fnt, fill=color)
     
     return image
 
@@ -68,7 +68,7 @@ def draw_textview(image, json, percent, current_sum, total):
     text = text.replace("{{current}}", str(current_sum))
     text = text.replace("{{percent}}", str(percent))
     
-    image = draw_text(image, text, json["font"], json["size"], (json["x"], json["y"]), collor_code=json["collor"])
+    image = draw_text(image, text, json["font"], json["size"], (json["x"], json["y"]), color_code=json["color"])
     
     return image
 
