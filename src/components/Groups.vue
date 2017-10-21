@@ -7,7 +7,7 @@
     </nav>
 
     <div class="container">
-      <div class="groups" v-if="isShowGroups">
+      <div class="groups" v-if="Object.keys(groups).length">
         <group v-for="(item, key) in groups" :image="item" :gid="key"></group>
       </div>
       <p v-else class="flow-text center-align">Пока ничего нет, начните работу с <b>DonateLo</b> просто привязав Вашу группу! Это просто!</p>
@@ -27,12 +27,12 @@
       Group
     },
     computed: {
-      isShowGroups() {
-        return !!Object.keys(this.groups).length;
-      },
       groups() {
         return this.$store.state.groups;
       }
+    },
+    mounted() {
+      this.$store.dispatch('loadGroups');
     }
   }
 </script>

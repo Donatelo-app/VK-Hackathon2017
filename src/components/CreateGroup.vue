@@ -15,13 +15,13 @@
           <p class="flow-text">Укажите данные группы:</p>
           <div class="row">
             <div class="input-field col s12">
-              <input id="gid" type="text" required class="validate">
+              <input id="gid" v-model="groupId" type="text" required class="validate">
               <label for="gid">ID группы</label>
             </div>
           </div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="token" type="text" required class="validate">
+              <input id="token" v-model="tokenGroup"  type="text" required class="validate">
               <label for="token">Токен группу</label>
             </div>
           </div>
@@ -29,7 +29,7 @@
           <p class="flow-text">Ваши реквезиты:</p>
           <div class="row">
             <div class="input-field col s12">
-              <input id="bitcoin" type="text" required class="validate">
+              <input id="bitcoin" v-model="bitcoinWallet"  type="text" required class="validate">
               <label for="token">Биткоин кошелек</label>
             </div>
           </div>
@@ -52,19 +52,22 @@
     },
     methods: {
       createGroup() {
-        this.$store.commit('setGroup', {
+        this.$store.dispatch('uploadData', {
           gid: this.groupId,
           info: {
-            cover: this.image,
-            token: this.tokenGroup,
-            bitcoin: this.bitcoin,
-            mastercard: this.mastercard,
-            tinkoff: this.tinkoff,
-            qiwi: this.tinkoff
-          },
-          views: []
+            cover: {
+              background: this.image,
+              views: []
+            },
+            wallets: {
+              token: this.tokenGroup,
+              bitcoin: this.bitcoin,
+              mastercard: this.mastercard,
+              tinkoff: this.tinkoff,
+              qiwi: this.tinkoff
+            }
+          }
         });
-        this.$router.push('edit');
       },
       onFileChange(e) {
         var files = e.target.files || e.dataTransfer.files;
