@@ -80,11 +80,17 @@ def draw_cover(json, current_sum):
     
     percent = int(current_sum/total*100)
     for view in json["views"]:
-        if view["type"] == "lineral":
-            image = draw_lineral(image, view, percent)
+        try:
+            if view["type"] == "lineral":
+                image = draw_lineral(image, view, percent)
+        except TypeError:
+            continue
     
     for view in json["views"]:
-        if view["type"] == "text":
-            image = draw_textview(image, view, percent, current_sum, json["total"])
+        try:
+            if view["type"] == "text":
+                image = draw_textview(image, view, percent, current_sum, json["total"])
+        except TypeError:
+            continue
     
     return image
