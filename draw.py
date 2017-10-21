@@ -56,7 +56,7 @@ def draw_lineral(image, json, percent):
         stand = None
     
     pb = draw_progress(progress, stand, percent, json["border"])
-    pb = pb.resize((pb.size[0]*json["w"], pb.size[1]*json["h"]))
+    pb = pb.resize((json["w"], json["h"]))
 
     pb = rotate_image(pb, json["angle"])
     image = paste_image(pb, image, (json["x"], json["y"]))
