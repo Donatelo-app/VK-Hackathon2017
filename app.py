@@ -57,6 +57,12 @@ def update_group():
 	if group_id not in group_list: group_list.append(group_id)
 	base.set("%s:list" % user_id, group_list)
 
+
+	full_groups_list = base.get("group-list", default=[])
+	if group_id not in full_groups_list: full_groups_list.append(group_id)
+	base.get("group-list", full_groups_list)
+
+
 	return "", 200
 
 
@@ -66,6 +72,13 @@ def update_group():
 def index():
 	return "Hello world", 200
 
+
+@app.route("/update")
+def update_heads():
+	groups_list = base.get("group-list", default=[])
+
+	for gid in groups_list:
+		pass
 
 if __name__ == "__main__":
 	app.run()

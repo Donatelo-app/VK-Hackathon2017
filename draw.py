@@ -1,4 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageColor
+from base64 import encodebytes, decodebytes
+from io import BytesIO
 
 
 fonts = {
@@ -44,3 +46,45 @@ def draw_text(image, text, font, size, point, collor_code="#FFFFFFFF"):
     d.text(point, text, font=fnt, fill=collor)
     
     return bg
+
+
+def draw_lineral(image, json, percent):
+    progress = Image.open(BytesIO(decodebytes(json["progress"])))
+    if json["stand"] is not None:  
+        stand = Image.open(BytesIO(decodebytes(json["stand"])))
+    else:
+        stand = None
+    
+    pb = draw_progress(progress, stand, percent, json["border"])
+    pb = pb.resize((pb.size[0]*json["w"], pb.size[1]*json["h"]))
+
+    pb = rotate_image(pb, json["angle"])
+    image = paste_image(pb, image, (json["x"], json["y"]))
+    
+    return image
+
+def draw_textview(image, json, percent, current_sum, total):
+    text = json["text"].replace("{{total}}", str(total))
+    text = text.replace("{{current}}", str(current_sum))
+    text = text.replace("{{percent}}", str(percent))
+    
+    image = draw_text(image, text, json["font"], json["size"], (json["x"], json["y"]), collor_code=json["collor"])
+    
+    return image
+
+
+def draw_head(json, current_sum):
+    image = Image.open(BytesIO(decodebytes(json["background"])))
+    total = json["total"]
+    if current_sum == 0: total = 1
+    
+    percent = int(current_sum/total*100)
+    for view in json["views"]:
+        if view["type"] == "lineral":
+            image = draw_lineral(image, view, percent)
+    
+    for view in json["views"]:
+        if view["type"] == "text":
+            image = draw_textview(image, view, percent, current_sum, json["total"])
+    
+    return image
