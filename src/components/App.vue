@@ -6,6 +6,6 @@
 
 <style>
   .vk-color {
-    background: #2a5885 !important;
+    background: #5e81a8 !important;
   }
 </style>

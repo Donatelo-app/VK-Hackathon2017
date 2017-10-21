@@ -1612,1332 +1612,6 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],28:[function(require,module,exports){
-exports = module.exports = Victor;
-
-/**
- * # Victor - A JavaScript 2D vector class with methods for common vector operations
- */
-
-/**
- * Constructor. Will also work without the `new` keyword
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = Victor(42, 1337);
- *
- * @param {Number} x Value of the x axis
- * @param {Number} y Value of the y axis
- * @return {Victor}
- * @api public
- */
-function Victor (x, y) {
-	if (!(this instanceof Victor)) {
-		return new Victor(x, y);
-	}
-
-	/**
-	 * The X axis
-	 *
-	 * ### Examples:
-	 *     var vec = new Victor.fromArray(42, 21);
-	 *
-	 *     vec.x;
-	 *     // => 42
-	 *
-	 * @api public
-	 */
-	this.x = x || 0;
-
-	/**
-	 * The Y axis
-	 *
-	 * ### Examples:
-	 *     var vec = new Victor.fromArray(42, 21);
-	 *
-	 *     vec.y;
-	 *     // => 21
-	 *
-	 * @api public
-	 */
-	this.y = y || 0;
-};
-
-/**
- * # Static
- */
-
-/**
- * Creates a new instance from an array
- *
- * ### Examples:
- *     var vec = Victor.fromArray([42, 21]);
- *
- *     vec.toString();
- *     // => x:42, y:21
- *
- * @name Victor.fromArray
- * @param {Array} array Array with the x and y values at index 0 and 1 respectively
- * @return {Victor} The new instance
- * @api public
- */
-Victor.fromArray = function (arr) {
-	return new Victor(arr[0] || 0, arr[1] || 0);
-};
-
-/**
- * Creates a new instance from an object
- *
- * ### Examples:
- *     var vec = Victor.fromObject({ x: 42, y: 21 });
- *
- *     vec.toString();
- *     // => x:42, y:21
- *
- * @name Victor.fromObject
- * @param {Object} obj Object with the values for x and y
- * @return {Victor} The new instance
- * @api public
- */
-Victor.fromObject = function (obj) {
-	return new Victor(obj.x || 0, obj.y || 0);
-};
-
-/**
- * # Manipulation
- *
- * These functions are chainable.
- */
-
-/**
- * Adds another vector's X axis to this one
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *     var vec2 = new Victor(20, 30);
- *
- *     vec1.addX(vec2);
- *     vec1.toString();
- *     // => x:30, y:10
- *
- * @param {Victor} vector The other vector you want to add to this one
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.addX = function (vec) {
-	this.x += vec.x;
-	return this;
-};
-
-/**
- * Adds another vector's Y axis to this one
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *     var vec2 = new Victor(20, 30);
- *
- *     vec1.addY(vec2);
- *     vec1.toString();
- *     // => x:10, y:40
- *
- * @param {Victor} vector The other vector you want to add to this one
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.addY = function (vec) {
-	this.y += vec.y;
-	return this;
-};
-
-/**
- * Adds another vector to this one
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *     var vec2 = new Victor(20, 30);
- *
- *     vec1.add(vec2);
- *     vec1.toString();
- *     // => x:30, y:40
- *
- * @param {Victor} vector The other vector you want to add to this one
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.add = function (vec) {
-	this.x += vec.x;
-	this.y += vec.y;
-	return this;
-};
-
-/**
- * Adds the given scalar to both vector axis
- *
- * ### Examples:
- *     var vec = new Victor(1, 2);
- *
- *     vec.addScalar(2);
- *     vec.toString();
- *     // => x: 3, y: 4
- *
- * @param {Number} scalar The scalar to add
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.addScalar = function (scalar) {
-	this.x += scalar;
-	this.y += scalar;
-	return this;
-};
-
-/**
- * Adds the given scalar to the X axis
- *
- * ### Examples:
- *     var vec = new Victor(1, 2);
- *
- *     vec.addScalarX(2);
- *     vec.toString();
- *     // => x: 3, y: 2
- *
- * @param {Number} scalar The scalar to add
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.addScalarX = function (scalar) {
-	this.x += scalar;
-	return this;
-};
-
-/**
- * Adds the given scalar to the Y axis
- *
- * ### Examples:
- *     var vec = new Victor(1, 2);
- *
- *     vec.addScalarY(2);
- *     vec.toString();
- *     // => x: 1, y: 4
- *
- * @param {Number} scalar The scalar to add
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.addScalarY = function (scalar) {
-	this.y += scalar;
-	return this;
-};
-
-/**
- * Subtracts the X axis of another vector from this one
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(20, 30);
- *
- *     vec1.subtractX(vec2);
- *     vec1.toString();
- *     // => x:80, y:50
- *
- * @param {Victor} vector The other vector you want subtract from this one
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.subtractX = function (vec) {
-	this.x -= vec.x;
-	return this;
-};
-
-/**
- * Subtracts the Y axis of another vector from this one
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(20, 30);
- *
- *     vec1.subtractY(vec2);
- *     vec1.toString();
- *     // => x:100, y:20
- *
- * @param {Victor} vector The other vector you want subtract from this one
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.subtractY = function (vec) {
-	this.y -= vec.y;
-	return this;
-};
-
-/**
- * Subtracts another vector from this one
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(20, 30);
- *
- *     vec1.subtract(vec2);
- *     vec1.toString();
- *     // => x:80, y:20
- *
- * @param {Victor} vector The other vector you want subtract from this one
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.subtract = function (vec) {
-	this.x -= vec.x;
-	this.y -= vec.y;
-	return this;
-};
-
-/**
- * Subtracts the given scalar from both axis
- *
- * ### Examples:
- *     var vec = new Victor(100, 200);
- *
- *     vec.subtractScalar(20);
- *     vec.toString();
- *     // => x: 80, y: 180
- *
- * @param {Number} scalar The scalar to subtract
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.subtractScalar = function (scalar) {
-	this.x -= scalar;
-	this.y -= scalar;
-	return this;
-};
-
-/**
- * Subtracts the given scalar from the X axis
- *
- * ### Examples:
- *     var vec = new Victor(100, 200);
- *
- *     vec.subtractScalarX(20);
- *     vec.toString();
- *     // => x: 80, y: 200
- *
- * @param {Number} scalar The scalar to subtract
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.subtractScalarX = function (scalar) {
-	this.x -= scalar;
-	return this;
-};
-
-/**
- * Subtracts the given scalar from the Y axis
- *
- * ### Examples:
- *     var vec = new Victor(100, 200);
- *
- *     vec.subtractScalarY(20);
- *     vec.toString();
- *     // => x: 100, y: 180
- *
- * @param {Number} scalar The scalar to subtract
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.subtractScalarY = function (scalar) {
-	this.y -= scalar;
-	return this;
-};
-
-/**
- * Divides the X axis by the x component of given vector
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *     var vec2 = new Victor(2, 0);
- *
- *     vec.divideX(vec2);
- *     vec.toString();
- *     // => x:50, y:50
- *
- * @param {Victor} vector The other vector you want divide by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.divideX = function (vector) {
-	this.x /= vector.x;
-	return this;
-};
-
-/**
- * Divides the Y axis by the y component of given vector
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *     var vec2 = new Victor(0, 2);
- *
- *     vec.divideY(vec2);
- *     vec.toString();
- *     // => x:100, y:25
- *
- * @param {Victor} vector The other vector you want divide by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.divideY = function (vector) {
-	this.y /= vector.y;
-	return this;
-};
-
-/**
- * Divides both vector axis by a axis values of given vector
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *     var vec2 = new Victor(2, 2);
- *
- *     vec.divide(vec2);
- *     vec.toString();
- *     // => x:50, y:25
- *
- * @param {Victor} vector The vector to divide by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.divide = function (vector) {
-	this.x /= vector.x;
-	this.y /= vector.y;
-	return this;
-};
-
-/**
- * Divides both vector axis by the given scalar value
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.divideScalar(2);
- *     vec.toString();
- *     // => x:50, y:25
- *
- * @param {Number} The scalar to divide by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.divideScalar = function (scalar) {
-	if (scalar !== 0) {
-		this.x /= scalar;
-		this.y /= scalar;
-	} else {
-		this.x = 0;
-		this.y = 0;
-	}
-
-	return this;
-};
-
-/**
- * Divides the X axis by the given scalar value
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.divideScalarX(2);
- *     vec.toString();
- *     // => x:50, y:50
- *
- * @param {Number} The scalar to divide by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.divideScalarX = function (scalar) {
-	if (scalar !== 0) {
-		this.x /= scalar;
-	} else {
-		this.x = 0;
-	}
-	return this;
-};
-
-/**
- * Divides the Y axis by the given scalar value
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.divideScalarY(2);
- *     vec.toString();
- *     // => x:100, y:25
- *
- * @param {Number} The scalar to divide by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.divideScalarY = function (scalar) {
-	if (scalar !== 0) {
-		this.y /= scalar;
-	} else {
-		this.y = 0;
-	}
-	return this;
-};
-
-/**
- * Inverts the X axis
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.invertX();
- *     vec.toString();
- *     // => x:-100, y:50
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.invertX = function () {
-	this.x *= -1;
-	return this;
-};
-
-/**
- * Inverts the Y axis
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.invertY();
- *     vec.toString();
- *     // => x:100, y:-50
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.invertY = function () {
-	this.y *= -1;
-	return this;
-};
-
-/**
- * Inverts both axis
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.invert();
- *     vec.toString();
- *     // => x:-100, y:-50
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.invert = function () {
-	this.invertX();
-	this.invertY();
-	return this;
-};
-
-/**
- * Multiplies the X axis by X component of given vector
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *     var vec2 = new Victor(2, 0);
- *
- *     vec.multiplyX(vec2);
- *     vec.toString();
- *     // => x:200, y:50
- *
- * @param {Victor} vector The vector to multiply the axis with
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.multiplyX = function (vector) {
-	this.x *= vector.x;
-	return this;
-};
-
-/**
- * Multiplies the Y axis by Y component of given vector
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *     var vec2 = new Victor(0, 2);
- *
- *     vec.multiplyX(vec2);
- *     vec.toString();
- *     // => x:100, y:100
- *
- * @param {Victor} vector The vector to multiply the axis with
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.multiplyY = function (vector) {
-	this.y *= vector.y;
-	return this;
-};
-
-/**
- * Multiplies both vector axis by values from a given vector
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *     var vec2 = new Victor(2, 2);
- *
- *     vec.multiply(vec2);
- *     vec.toString();
- *     // => x:200, y:100
- *
- * @param {Victor} vector The vector to multiply by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.multiply = function (vector) {
-	this.x *= vector.x;
-	this.y *= vector.y;
-	return this;
-};
-
-/**
- * Multiplies both vector axis by the given scalar value
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.multiplyScalar(2);
- *     vec.toString();
- *     // => x:200, y:100
- *
- * @param {Number} The scalar to multiply by
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.multiplyScalar = function (scalar) {
-	this.x *= scalar;
-	this.y *= scalar;
-	return this;
-};
-
-/**
- * Multiplies the X axis by the given scalar
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.multiplyScalarX(2);
- *     vec.toString();
- *     // => x:200, y:50
- *
- * @param {Number} The scalar to multiply the axis with
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.multiplyScalarX = function (scalar) {
-	this.x *= scalar;
-	return this;
-};
-
-/**
- * Multiplies the Y axis by the given scalar
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.multiplyScalarY(2);
- *     vec.toString();
- *     // => x:100, y:100
- *
- * @param {Number} The scalar to multiply the axis with
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.multiplyScalarY = function (scalar) {
-	this.y *= scalar;
-	return this;
-};
-
-/**
- * Normalize
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.normalize = function () {
-	var length = this.length();
-
-	if (length === 0) {
-		this.x = 1;
-		this.y = 0;
-	} else {
-		this.divide(Victor(length, length));
-	}
-	return this;
-};
-
-Victor.prototype.norm = Victor.prototype.normalize;
-
-/**
- * If the absolute vector axis is greater than `max`, multiplies the axis by `factor`
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.limit(80, 0.9);
- *     vec.toString();
- *     // => x:90, y:50
- *
- * @param {Number} max The maximum value for both x and y axis
- * @param {Number} factor Factor by which the axis are to be multiplied with
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.limit = function (max, factor) {
-	if (Math.abs(this.x) > max){ this.x *= factor; }
-	if (Math.abs(this.y) > max){ this.y *= factor; }
-	return this;
-};
-
-/**
- * Randomizes both vector axis with a value between 2 vectors
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.randomize(new Victor(50, 60), new Victor(70, 80`));
- *     vec.toString();
- *     // => x:67, y:73
- *
- * @param {Victor} topLeft first vector
- * @param {Victor} bottomRight second vector
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.randomize = function (topLeft, bottomRight) {
-	this.randomizeX(topLeft, bottomRight);
-	this.randomizeY(topLeft, bottomRight);
-
-	return this;
-};
-
-/**
- * Randomizes the y axis with a value between 2 vectors
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.randomizeX(new Victor(50, 60), new Victor(70, 80`));
- *     vec.toString();
- *     // => x:55, y:50
- *
- * @param {Victor} topLeft first vector
- * @param {Victor} bottomRight second vector
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.randomizeX = function (topLeft, bottomRight) {
-	var min = Math.min(topLeft.x, bottomRight.x);
-	var max = Math.max(topLeft.x, bottomRight.x);
-	this.x = random(min, max);
-	return this;
-};
-
-/**
- * Randomizes the y axis with a value between 2 vectors
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.randomizeY(new Victor(50, 60), new Victor(70, 80`));
- *     vec.toString();
- *     // => x:100, y:66
- *
- * @param {Victor} topLeft first vector
- * @param {Victor} bottomRight second vector
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.randomizeY = function (topLeft, bottomRight) {
-	var min = Math.min(topLeft.y, bottomRight.y);
-	var max = Math.max(topLeft.y, bottomRight.y);
-	this.y = random(min, max);
-	return this;
-};
-
-/**
- * Randomly randomizes either axis between 2 vectors
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.randomizeAny(new Victor(50, 60), new Victor(70, 80));
- *     vec.toString();
- *     // => x:100, y:77
- *
- * @param {Victor} topLeft first vector
- * @param {Victor} bottomRight second vector
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.randomizeAny = function (topLeft, bottomRight) {
-	if (!! Math.round(Math.random())) {
-		this.randomizeX(topLeft, bottomRight);
-	} else {
-		this.randomizeY(topLeft, bottomRight);
-	}
-	return this;
-};
-
-/**
- * Rounds both axis to an integer value
- *
- * ### Examples:
- *     var vec = new Victor(100.2, 50.9);
- *
- *     vec.unfloat();
- *     vec.toString();
- *     // => x:100, y:51
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.unfloat = function () {
-	this.x = Math.round(this.x);
-	this.y = Math.round(this.y);
-	return this;
-};
-
-/**
- * Rounds both axis to a certain precision
- *
- * ### Examples:
- *     var vec = new Victor(100.2, 50.9);
- *
- *     vec.unfloat();
- *     vec.toString();
- *     // => x:100, y:51
- *
- * @param {Number} Precision (default: 8)
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.toFixed = function (precision) {
-	if (typeof precision === 'undefined') { precision = 8; }
-	this.x = this.x.toFixed(precision);
-	this.y = this.y.toFixed(precision);
-	return this;
-};
-
-/**
- * Performs a linear blend / interpolation of the X axis towards another vector
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 100);
- *     var vec2 = new Victor(200, 200);
- *
- *     vec1.mixX(vec2, 0.5);
- *     vec.toString();
- *     // => x:150, y:100
- *
- * @param {Victor} vector The other vector
- * @param {Number} amount The blend amount (optional, default: 0.5)
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.mixX = function (vec, amount) {
-	if (typeof amount === 'undefined') {
-		amount = 0.5;
-	}
-
-	this.x = (1 - amount) * this.x + amount * vec.x;
-	return this;
-};
-
-/**
- * Performs a linear blend / interpolation of the Y axis towards another vector
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 100);
- *     var vec2 = new Victor(200, 200);
- *
- *     vec1.mixY(vec2, 0.5);
- *     vec.toString();
- *     // => x:100, y:150
- *
- * @param {Victor} vector The other vector
- * @param {Number} amount The blend amount (optional, default: 0.5)
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.mixY = function (vec, amount) {
-	if (typeof amount === 'undefined') {
-		amount = 0.5;
-	}
-
-	this.y = (1 - amount) * this.y + amount * vec.y;
-	return this;
-};
-
-/**
- * Performs a linear blend / interpolation towards another vector
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 100);
- *     var vec2 = new Victor(200, 200);
- *
- *     vec1.mix(vec2, 0.5);
- *     vec.toString();
- *     // => x:150, y:150
- *
- * @param {Victor} vector The other vector
- * @param {Number} amount The blend amount (optional, default: 0.5)
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.mix = function (vec, amount) {
-	this.mixX(vec, amount);
-	this.mixY(vec, amount);
-	return this;
-};
-
-/**
- * # Products
- */
-
-/**
- * Creates a clone of this vector
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *     var vec2 = vec1.clone();
- *
- *     vec2.toString();
- *     // => x:10, y:10
- *
- * @return {Victor} A clone of the vector
- * @api public
- */
-Victor.prototype.clone = function () {
-	return new Victor(this.x, this.y);
-};
-
-/**
- * Copies another vector's X component in to its own
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *     var vec2 = new Victor(20, 20);
- *     var vec2 = vec1.copyX(vec1);
- *
- *     vec2.toString();
- *     // => x:20, y:10
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.copyX = function (vec) {
-	this.x = vec.x;
-	return this;
-};
-
-/**
- * Copies another vector's Y component in to its own
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *     var vec2 = new Victor(20, 20);
- *     var vec2 = vec1.copyY(vec1);
- *
- *     vec2.toString();
- *     // => x:10, y:20
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.copyY = function (vec) {
-	this.y = vec.y;
-	return this;
-};
-
-/**
- * Copies another vector's X and Y components in to its own
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *     var vec2 = new Victor(20, 20);
- *     var vec2 = vec1.copy(vec1);
- *
- *     vec2.toString();
- *     // => x:20, y:20
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.copy = function (vec) {
-	this.copyX(vec);
-	this.copyY(vec);
-	return this;
-};
-
-/**
- * Sets the vector to zero (0,0)
- *
- * ### Examples:
- *     var vec1 = new Victor(10, 10);
- *		 var1.zero();
- *     vec1.toString();
- *     // => x:0, y:0
- *
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.zero = function () {
-	this.x = this.y = 0;
-	return this;
-};
-
-/**
- * Calculates the dot product of this vector and another
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(200, 60);
- *
- *     vec1.dot(vec2);
- *     // => 23000
- *
- * @param {Victor} vector The second vector
- * @return {Number} Dot product
- * @api public
- */
-Victor.prototype.dot = function (vec2) {
-	return this.x * vec2.x + this.y * vec2.y;
-};
-
-Victor.prototype.cross = function (vec2) {
-	return (this.x * vec2.y ) - (this.y * vec2.x );
-};
-
-/**
- * Projects a vector onto another vector, setting itself to the result.
- *
- * ### Examples:
- *     var vec = new Victor(100, 0);
- *     var vec2 = new Victor(100, 100);
- *
- *     vec.projectOnto(vec2);
- *     vec.toString();
- *     // => x:50, y:50
- *
- * @param {Victor} vector The other vector you want to project this vector onto
- * @return {Victor} `this` for chaining capabilities
- * @api public
- */
-Victor.prototype.projectOnto = function (vec2) {
-    var coeff = ( (this.x * vec2.x)+(this.y * vec2.y) ) / ((vec2.x*vec2.x)+(vec2.y*vec2.y));
-    this.x = coeff * vec2.x;
-    this.y = coeff * vec2.y;
-    return this;
-};
-
-
-Victor.prototype.horizontalAngle = function () {
-	return Math.atan2(this.y, this.x);
-};
-
-Victor.prototype.horizontalAngleDeg = function () {
-	return radian2degrees(this.horizontalAngle());
-};
-
-Victor.prototype.verticalAngle = function () {
-	return Math.atan2(this.x, this.y);
-};
-
-Victor.prototype.verticalAngleDeg = function () {
-	return radian2degrees(this.verticalAngle());
-};
-
-Victor.prototype.angle = Victor.prototype.horizontalAngle;
-Victor.prototype.angleDeg = Victor.prototype.horizontalAngleDeg;
-Victor.prototype.direction = Victor.prototype.horizontalAngle;
-
-Victor.prototype.rotate = function (angle) {
-	var nx = (this.x * Math.cos(angle)) - (this.y * Math.sin(angle));
-	var ny = (this.x * Math.sin(angle)) + (this.y * Math.cos(angle));
-
-	this.x = nx;
-	this.y = ny;
-
-	return this;
-};
-
-Victor.prototype.rotateDeg = function (angle) {
-	angle = degrees2radian(angle);
-	return this.rotate(angle);
-};
-
-Victor.prototype.rotateTo = function(rotation) {
-	return this.rotate(rotation-this.angle());
-};
-
-Victor.prototype.rotateToDeg = function(rotation) {
-	rotation = degrees2radian(rotation);
-	return this.rotateTo(rotation);
-};
-
-Victor.prototype.rotateBy = function (rotation) {
-	var angle = this.angle() + rotation;
-
-	return this.rotate(angle);
-};
-
-Victor.prototype.rotateByDeg = function (rotation) {
-	rotation = degrees2radian(rotation);
-	return this.rotateBy(rotation);
-};
-
-/**
- * Calculates the distance of the X axis between this vector and another
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(200, 60);
- *
- *     vec1.distanceX(vec2);
- *     // => -100
- *
- * @param {Victor} vector The second vector
- * @return {Number} Distance
- * @api public
- */
-Victor.prototype.distanceX = function (vec) {
-	return this.x - vec.x;
-};
-
-/**
- * Same as `distanceX()` but always returns an absolute number
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(200, 60);
- *
- *     vec1.absDistanceX(vec2);
- *     // => 100
- *
- * @param {Victor} vector The second vector
- * @return {Number} Absolute distance
- * @api public
- */
-Victor.prototype.absDistanceX = function (vec) {
-	return Math.abs(this.distanceX(vec));
-};
-
-/**
- * Calculates the distance of the Y axis between this vector and another
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(200, 60);
- *
- *     vec1.distanceY(vec2);
- *     // => -10
- *
- * @param {Victor} vector The second vector
- * @return {Number} Distance
- * @api public
- */
-Victor.prototype.distanceY = function (vec) {
-	return this.y - vec.y;
-};
-
-/**
- * Same as `distanceY()` but always returns an absolute number
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(200, 60);
- *
- *     vec1.distanceY(vec2);
- *     // => 10
- *
- * @param {Victor} vector The second vector
- * @return {Number} Absolute distance
- * @api public
- */
-Victor.prototype.absDistanceY = function (vec) {
-	return Math.abs(this.distanceY(vec));
-};
-
-/**
- * Calculates the euclidean distance between this vector and another
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(200, 60);
- *
- *     vec1.distance(vec2);
- *     // => 100.4987562112089
- *
- * @param {Victor} vector The second vector
- * @return {Number} Distance
- * @api public
- */
-Victor.prototype.distance = function (vec) {
-	return Math.sqrt(this.distanceSq(vec));
-};
-
-/**
- * Calculates the squared euclidean distance between this vector and another
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(200, 60);
- *
- *     vec1.distanceSq(vec2);
- *     // => 10100
- *
- * @param {Victor} vector The second vector
- * @return {Number} Distance
- * @api public
- */
-Victor.prototype.distanceSq = function (vec) {
-	var dx = this.distanceX(vec),
-		dy = this.distanceY(vec);
-
-	return dx * dx + dy * dy;
-};
-
-/**
- * Calculates the length or magnitude of the vector
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.length();
- *     // => 111.80339887498948
- *
- * @return {Number} Length / Magnitude
- * @api public
- */
-Victor.prototype.length = function () {
-	return Math.sqrt(this.lengthSq());
-};
-
-/**
- * Squared length / magnitude
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *
- *     vec.lengthSq();
- *     // => 12500
- *
- * @return {Number} Length / Magnitude
- * @api public
- */
-Victor.prototype.lengthSq = function () {
-	return this.x * this.x + this.y * this.y;
-};
-
-Victor.prototype.magnitude = Victor.prototype.length;
-
-/**
- * Returns a true if vector is (0, 0)
- *
- * ### Examples:
- *     var vec = new Victor(100, 50);
- *     vec.zero();
- *
- *     // => true
- *
- * @return {Boolean}
- * @api public
- */
-Victor.prototype.isZero = function() {
-	return this.x === 0 && this.y === 0;
-};
-
-/**
- * Returns a true if this vector is the same as another
- *
- * ### Examples:
- *     var vec1 = new Victor(100, 50);
- *     var vec2 = new Victor(100, 50);
- *     vec1.isEqualTo(vec2);
- *
- *     // => true
- *
- * @return {Boolean}
- * @api public
- */
-Victor.prototype.isEqualTo = function(vec2) {
-	return this.x === vec2.x && this.y === vec2.y;
-};
-
-/**
- * # Utility Methods
- */
-
-/**
- * Returns an string representation of the vector
- *
- * ### Examples:
- *     var vec = new Victor(10, 20);
- *
- *     vec.toString();
- *     // => x:10, y:20
- *
- * @return {String}
- * @api public
- */
-Victor.prototype.toString = function () {
-	return 'x:' + this.x + ', y:' + this.y;
-};
-
-/**
- * Returns an array representation of the vector
- *
- * ### Examples:
- *     var vec = new Victor(10, 20);
- *
- *     vec.toArray();
- *     // => [10, 20]
- *
- * @return {Array}
- * @api public
- */
-Victor.prototype.toArray = function () {
-	return [ this.x, this.y ];
-};
-
-/**
- * Returns an object representation of the vector
- *
- * ### Examples:
- *     var vec = new Victor(10, 20);
- *
- *     vec.toObject();
- *     // => { x: 10, y: 20 }
- *
- * @return {Object}
- * @api public
- */
-Victor.prototype.toObject = function () {
-	return { x: this.x, y: this.y };
-};
-
-
-var degrees = 180 / Math.PI;
-
-function random (min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function radian2degrees (rad) {
-	return rad * degrees;
-}
-
-function degrees2radian (deg) {
-	return deg / degrees;
-}
-
-},{}],29:[function(require,module,exports){
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -3156,7 +1830,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],30:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (process){
 /**
   * vue-router v2.8.1
@@ -5785,7 +4459,7 @@ if (inBrowser && window.Vue) {
 module.exports = VueRouter;
 
 }).call(this,require('_process'))
-},{"_process":27}],31:[function(require,module,exports){
+},{"_process":27}],30:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v2.5.2
@@ -16350,7 +15024,7 @@ Vue$3.compile = compileToFunctions;
 module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":27}],32:[function(require,module,exports){
+},{"_process":27}],31:[function(require,module,exports){
 var inserted = exports.cache = {}
 
 function noop () {}
@@ -16375,7 +15049,7 @@ exports.insert = function (css) {
   }
 }
 
-},{}],33:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function (process){
 /**
  * vuex v2.5.0
@@ -17311,8 +15985,8 @@ var index = {
 module.exports = index;
 
 }).call(this,require('_process'))
-},{"_process":27}],34:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".vk-color {\n  background: #2a5885 !important;\n}")
+},{"_process":27}],33:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".vk-color {\n  background: #5e81a8 !important;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('router-view')],1)}
@@ -17328,41 +16002,101 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-dc887202", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],35:[function(require,module,exports){
+},{"vue":30,"vue-hot-reload-api":28,"vueify/lib/insert-css":31}],34:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".col[data-v-72446a58] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.card-panel[data-v-72446a58] {\n  height: 150px;\n}")
 ;(function(){
 
 
-const VueDRR = require('./DRR.vue');
-
 module.exports = {
-  name: 'app',
-  components: {
-    'vue-drr': VueDRR
+  data() {
+    return {
+      scale: 1
+    };
   },
   methods: {
-    showchange(data) {
-      console.log(JSON.stringify(data));
+    addTextNode() {
+      var iText = new fabric.IText('Ваш текст', {
+        left: 50,
+        top: 50,
+        fill: 'white',
+        fontFamily: 'Bebas Neue',
+        fontWeight: 'normal',
+        fontSize: 60,
+        padding: 7
+      });
+      iText.scale(this.scale);
+      canvas.add(iText);
+    },
+    addProgressBar(id) {
+      let data = this.$store.state.bars[0];
+
+      fabric.Image.fromURL(data.progress, stand => {
+        stand.selected = true;
+        stand.setWidth(data.w + data.border * 2);
+        stand.setHeight(data.h + data.border * 2);
+        stand.left -= data.border;
+        stand.top -= data.border;
+        stand.scale(this.scale);
+        var filter = new fabric.Image.filters.Tint({
+          color: data.stand_color,
+          opacity: 1
+        });
+        stand.filters.push(filter);
+        stand.applyFilters(canvas.renderAll.bind(canvas));
+
+        fabric.Image.fromURL(data.progress, progress => {
+          progress.scale(this.scale);
+          progress.setWidth(data.w / 2);
+          progress.setHeight(data.h);
+          var filter = new fabric.Image.filters.Tint({
+            color: data.progress_color,
+            opacity: 1
+          });
+          progress.filters.push(filter);
+          progress.applyFilters(canvas.renderAll.bind(canvas));
+
+          var group = new fabric.Group([stand, progress], {
+            left: 100,
+            top: 25
+          });
+          canvas.add(group);
+        });
+      });
     }
+  },
+  mounted() {
+    window.canvas = new fabric.Canvas('playground');
+    canvas.setWidth(window.innerWidth);
+    canvas.setHeight(400);
+
+    fabric.Image.fromURL('img/bg.jpg', img => {
+      img.set('selectable', false);
+      this.scale = window.innerWidth / img.getWidth();
+      img.scale(this.scale);
+      canvas.add(img);
+    });
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"constructor"}},[_c('h1',[_vm._v("DonateLo")]),_vm._v(" "),_c('div',{staticStyle:{"height":"500px","width":"500px","float":"left","position":"relative","border":"1px solid black","padding":"5px"}},[_c('vue-drr',{attrs:{"w":180,"h":180,"bounds":{parent:true},"rotatable":true}},[_c('textarea',{staticStyle:{"height":"100%"}},[_vm._v("ПАЦАНЫ, КИНЬТЕ БАБОК НА ПИТЕР, В ЭТОТ РАЗ Я ЕГО ТОЧНО ВЫЕБУ")])])],1)])}
-__vue__options__.staticRenderFns = []
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"constructor"}},[_c('canvas',{attrs:{"id":"playground"}}),_vm._v(" "),_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel",on:{"click":_vm.addTextNode}},[_vm._v("\n          Add text\n        ")])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel",on:{"click":_vm.addProgressBar}},[_vm._v("\n          Bar 1\n        ")])]),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1)])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel"},[_vm._v("\n          Bar 2\n        ")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel"},[_vm._v("\n          Bar 3\n        ")])])}]
+__vue__options__._scopeId = "data-v-72446a58"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72446a58", __vue__options__)
   } else {
     hotAPI.rerender("data-v-72446a58", __vue__options__)
   }
 })()}
-},{"./DRR.vue":37,"vue":31,"vue-hot-reload-api":29}],36:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-wallpaper {\n  cursor: pointer;\n  height: 200px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 67px;\n  position: relative;\n  box-sizing: border-box;\n}\n#preview-image {\n  position: absolute;\n  width: 100vw;\n  height: 200px;\n  background-position: center;\n  background-size: cover;\n  z-index: 100;\n  top: -5px;\n  left: -5px;\n}\n#select-image {\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n}")
+},{"vue":30,"vue-hot-reload-api":28,"vueify/lib/insert-css":31}],35:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-wallpaper[data-v-369198c1] {\n  cursor: pointer;\n  height: 200px;\n  border: 5px dashed #7a9ee0;\n  width: 100%;\n  text-align: center;\n  padding-top: 67px;\n  position: relative;\n  box-sizing: border-box;\n}\n#preview-image[data-v-369198c1] {\n  position: absolute;\n  width: 100vw;\n  height: 200px;\n  background-position: center;\n  background-size: cover;\n  z-index: 100;\n  top: -5px;\n  left: -5px;\n}\n#select-image[data-v-369198c1] {\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n}")
 ;(function(){
 
 
@@ -17401,8 +16135,9 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"create-group"}},[_c('div',{attrs:{"id":"add-wallpaper"}},[_c('div',{style:({backgroundImage: 'url(' + _vm.image + ')'}),attrs:{"id":"preview-image"}}),_vm._v(" "),_c('input',{attrs:{"type":"file","id":"select-image","required":""},on:{"change":_vm.onFileChange}}),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])]),_vm._v(" "),_c('div',{staticClass:"container"},[_c('h1',{staticClass:"label"}),_vm._v(" "),_c('div',{staticClass:"row"},[_c('form',{staticClass:"col s12",on:{"submit":function($event){$event.preventDefault();_vm.createGroup($event)}}},[_c('p',{staticClass:"flow-text"},[_vm._v("Укажите данные группы:")]),_vm._v(" "),_vm._m(0),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Ваши реквезиты:")]),_vm._v(" "),_vm._m(2),_vm._v(" "),_vm._m(3)])])])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"gid","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"gid"}},[_vm._v("ID группы")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"token","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"token"}},[_vm._v("Токен группу")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"bitcoin","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"token"}},[_vm._v("Биткоин кошелек")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{staticClass:"col s12 waves-effect waves-light btn btn-large vk-color",attrs:{"type":"submit"}},[_c('i',{staticClass:"material-icons left"},[_vm._v("navigate_next")]),_vm._v("Перейти к редактированию")])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"create-group"}},[_c('form',{on:{"submit":function($event){$event.preventDefault();_vm.createGroup($event)}}},[_c('div',{attrs:{"id":"add-wallpaper"}},[_c('div',{style:({backgroundImage: 'url(' + _vm.image + ')'}),attrs:{"id":"preview-image"}}),_vm._v(" "),_c('input',{attrs:{"type":"file","id":"select-image","required":""},on:{"change":_vm.onFileChange}}),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])]),_vm._v(" "),_vm._m(0)])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Укажите данные группы:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"gid","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"gid"}},[_vm._v("ID группы")])])]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"token","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"token"}},[_vm._v("Токен группу")])])]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Ваши реквезиты:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{staticClass:"validate",attrs:{"id":"bitcoin","type":"text","required":""}}),_vm._v(" "),_c('label',{attrs:{"for":"token"}},[_vm._v("Биткоин кошелек")])])]),_vm._v(" "),_c('button',{staticClass:"col s12 waves-effect waves-light btn btn-large vk-color",attrs:{"type":"submit"}},[_c('i',{staticClass:"material-icons left"},[_vm._v("navigate_next")]),_vm._v("Перейти к редактированию")])])])}]
+__vue__options__._scopeId = "data-v-369198c1"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -17414,335 +16149,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-369198c1", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],37:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".dragable[data-v-08d355fc] {\r\n  position: relative;\r\n  border: 1px solid black;\r\n  text-align: center;\r\n  padding: 10px;\r\n  background: #fff;\r\n  box-sizing: border-box;\r\n  overflow: hidden;\r\n  float: left;\r\n  margin: 10px;\r\n}\r\n\r\n.scale[data-v-08d355fc] {\r\n  position: absolute;\r\n  width: 20px;\r\n  height: 20px;\r\n  bottom: 0;\r\n  right: 0;\r\n  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pg08IS0tIEdlbmVyYXRvcjogQWRvYmUgRmlyZXdvcmtzIENTNiwgRXhwb3J0IFNWRyBFeHRlbnNpb24gYnkgQWFyb24gQmVhbGwgKGh0dHA6Ly9maXJld29ya3MuYWJlYWxsLmNvbSkgLiBWZXJzaW9uOiAwLjYuMSAgLS0+DTwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DTxzdmcgaWQ9IlVudGl0bGVkLVBhZ2UlMjAxIiB2aWV3Qm94PSIwIDAgNiA2IiBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHZlcnNpb249IjEuMSINCXhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiDQl4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjZweCIgaGVpZ2h0PSI2cHgiDT4NCTxnIG9wYWNpdHk9IjAuMzAyIj4NCQk8cGF0aCBkPSJNIDYgNiBMIDAgNiBMIDAgNC4yIEwgNCA0LjIgTCA0LjIgNC4yIEwgNC4yIDAgTCA2IDAgTCA2IDYgTCA2IDYgWiIgZmlsbD0iIzAwMDAwMCIvPg0JPC9nPg08L3N2Zz4=');\r\n  background-position: bottom right;\r\n  padding: 0 3px 3px 0;\r\n  background-repeat: no-repeat;\r\n  background-origin: content-box;\r\n  box-sizing: border-box;\r\n  cursor: se-resize;\r\n}\r\n\r\n.rotate[data-v-08d355fc] {\r\n  position: absolute;\r\n  width: 20px;\r\n  height: 20px;\r\n  top: 0;\r\n  right: 0;\r\n  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjYiIGhlaWdodD0iNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPGcgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDMuMDAwMDAwMDAwMDAwMDAwNCwzKSAiIGlkPSJzdmdfMSIgb3BhY2l0eT0iMC4zMDIiPgogICA8cGF0aCBpZD0ic3ZnXzIiIGZpbGw9IiMwMDAwMDAiIGQ9Im02LDZsLTYsMGwwLC0xLjhsNCwwbDAuMiwwbDAsLTQuMmwxLjgsMGwwLDZsMCwweiIvPgogIDwvZz4KIDwvZz4KPC9zdmc+');\r\n  background-position: top right;\r\n  padding: 3px 3px 0px 0;\r\n  background-repeat: no-repeat;\r\n  background-origin: content-box;\r\n  box-sizing: border-box;\r\n  cursor: se-resize;\r\n}")
-;(function(){
-
-
-const Vector = require('victor');
-
-let findInArray = function (array, callback) {
-  for (let i = 0, length = array.length; i < length; i++) {
-    if (callback.apply(callback, [array[i], i, array])) return array[i];
-  }
-};
-
-let isFunction = function (func) {
-  return typeof func === 'function' || Object.prototype.toString.call(func) === '[object Function]';
-};
-
-let isNum = function (num) {
-  return typeof num === 'number' && !isNaN(num);
-};
-
-let int = function (a) {
-  return parseInt(a, 10);
-};
-
-let outerHeight = function (node) {
-  let height = node.clientHeight;
-  let computedStyle = window.getComputedStyle(node);
-  height += int(computedStyle.borderTopWidth);
-  height += int(computedStyle.borderBottomWidth);
-
-  return height;
-};
-
-let outerWidth = function (node) {
-  let width = node.clientWidth;
-  let computedStyle = window.getComputedStyle(node);
-  width += int(computedStyle.borderLeftWidth);
-  width += int(computedStyle.borderRightWidth);
-
-  return width;
-};
-let innerHeight = function (node) {
-  let height = node.clientHeight;
-  let computedStyle = window.getComputedStyle(node);
-  height -= int(computedStyle.paddingTop);
-  height -= int(computedStyle.paddingBottom);
-  return height;
-};
-
-let innerWidth = function (node) {
-  let width = node.clientWidth;
-  let computedStyle = window.getComputedStyle(node);
-  width -= int(computedStyle.paddingLeft);
-  width -= int(computedStyle.paddingRight);
-  return width;
-};
-
-let matchesSelectorFunc = '';
-let matchesSelector = function (el, selector) {
-  if (!matchesSelectorFunc) {
-    matchesSelectorFunc = findInArray(['matches', 'webkitMatchesSelector', 'mozMatchesSelector', 'msMatchesSelector', 'oMatchesSelector'], function (method) {
-      return isFunction(el[method]);
-    });
-  }
-
-  return el[matchesSelectorFunc].call(el, selector);
-};
-
-let getBoundPosition = function (bounds, node, clientX, clientY) {
-  if (!bounds) return [clientX, clientY];
-
-  let parent = node.parentNode;
-
-  if (bounds.parent) {
-    let nodeStyle = window.getComputedStyle(node);
-    let parentStyle = window.getComputedStyle(parent);
-
-    bounds = {
-      left: -node.offsetLeft + int(parentStyle.paddingLeft) + int(nodeStyle.borderLeftWidth) + int(nodeStyle.marginLeft),
-      top: -node.offsetTop + int(parentStyle.paddingTop) + int(nodeStyle.borderTopWidth) + int(nodeStyle.marginTop),
-      right: innerWidth(parent) - node.offsetLeft - outerWidth(node),
-      bottom: innerHeight(parent) - outerHeight(node) - node.offsetTop
-    };
-  }
-
-  if (isNum(bounds.right)) clientX = Math.min(clientX, bounds.right);
-  if (isNum(bounds.bottom)) clientY = Math.min(clientY, bounds.bottom);
-
-  if (isNum(bounds.left)) clientX = Math.max(clientX, bounds.left);
-  if (isNum(bounds.top)) clientY = Math.max(clientY, bounds.top);
-
-  return [clientX, clientY];
-};
-
-module.exports = {
-  replace: true,
-  name: 'dragable',
-  props: {
-    w: {
-      type: Number,
-      default: 200
-    },
-    h: {
-      type: Number,
-      default: 200
-    },
-    x: {
-      type: Number,
-      default: 0
-    },
-    y: {
-      type: Number,
-      default: 0
-    },
-    r: {
-      type: Number,
-      default: 0
-    },
-    rotatable: {
-      type: Boolean,
-      default: false
-    },
-    axis: {
-      type: String,
-      default: 'both'
-    },
-    handle: {
-      type: String,
-      default: ''
-    },
-    cancel: {
-      type: String,
-      default: ''
-    },
-    grid: {
-      type: Array,
-      default: function () {
-        return [0, 0];
-      }
-    },
-    bounds: {
-      type: Object,
-      default: null
-    }
-  },
-  mounted: function () {
-    var el = document.documentElement;
-    var event = 'mousemove';
-    var handler = this.handleMove;
-
-    if (el.attachEvent) {
-      el.attachEvent('on' + event, handler);
-    } else if (el.addEventListener) {
-      el.addEventListener(event, handler, true);
-    } else {
-      el['on' + event] = handler;
-    }
-
-    if (!this.rotatable) {
-      this.$el.getElementsByClassName('rotate')[0].className = '';
-    } else {
-      this.rotate = this.r;
-    }
-  },
-  beforeDestroy: function () {
-    var el = document.documentElement;
-    var event = 'mousemove';
-    var handler = this.handleMove;
-
-    if (el.detachEvent) {
-      el.detachEvent('on' + event, handler);
-    } else if (el.removeEventListener) {
-      el.removeEventListener(event, handler, true);
-    } else {
-      el['on' + event] = null;
-    }
-  },
-  methods: {
-    getRotateAngle: function (x, y) {
-      var rCenter = this._getCenter();
-      var vStart = new Vector(this.rotateStartX - rCenter.x, this.rotateStartY - rCenter.y);
-      var vEnd = new Vector(x - rCenter.x, y - rCenter.y);
-      return vEnd.angleDeg() - vStart.angleDeg();
-    },
-    _getCenter: function () {
-      var rect = this.$el.getBoundingClientRect();
-      return {
-        x: (rect.left + rect.right) / 2,
-        y: (rect.bottom + rect.top) / 2
-      };
-    },
-    rotateStart: function (e) {
-      if (this.rotatable) {
-        this.rotateStartX = e.clientX;
-        this.rotateStartY = e.clientY;
-        this.rotating = true;
-      }
-    },
-    resizeStart: function (e) {
-      this.resizeStartX = e.clientX;
-      this.resizeStartY = e.clientY;
-      this.resizing = true;
-      this.lastW = this.localw;
-      this.lastH = this.localh;
-    },
-    handleDown: function (e) {
-      if (this.handle && !matchesSelector(e.target, this.handle)) {
-        return;
-      }
-      if (this.cancel && matchesSelector(e.target, this.cancel)) {
-        return;
-      }
-      if (!this.lastX) {
-        this.lastX = e.clientX;
-        this.lastY = e.clientY;
-      }
-      this.dragging = true;
-    },
-    handleUp: function (e) {
-      this.dragging = false;
-      this.resizing = false;
-      this.rotating = false;
-      this.$emit('handleUp', {
-        x: this.localx,
-        y: this.localy,
-        w: this.localw,
-        h: this.localh,
-        r: this.localr
-      });
-    },
-    handleMove: function (e) {
-      if (e.stopPropagation) e.stopPropagation();
-      if (e.preventDefault) e.preventDefault();
-
-      if (this.dragging) {
-        let deltax = e.clientX - this.lastX;
-        let deltay = e.clientY - this.lastY;
-
-        let deltaxround = Math.round(deltax / this.grid[0]) * this.grid[0];
-        let deltayround = Math.round(deltay / this.grid[1]) * this.grid[1];
-
-        let thisx = this.localx;
-        let thisy = this.localy;
-
-        if (this.grid[0] > 0 && this.grid[1] > 0) {
-          if (this.axis === 'both') {
-            thisx = deltaxround;
-            thisy = deltayround;
-          } else if (this.axis === 'x') {
-            thisx = deltaxround;
-          } else if (this.axis === 'y') {
-            thisy = deltayround;
-          }
-        } else {
-          if (this.axis === 'both') {
-            thisx = e.clientX - this.lastX;
-            thisy = e.clientY - this.lastY;
-          } else if (this.axis === 'x') {
-            thisx = e.clientX - this.lastX;
-          } else if (this.axis === 'y') {
-            thisy = e.clientY - this.lastY;
-          }
-        }
-
-        if (this.bounds) {
-          [thisx, thisy] = getBoundPosition(this.bounds, this.$el, thisx, thisy);
-        }
-
-        this.localx = thisx;
-        this.localy = thisy;
-      }
-      if (this.resizing) {
-        this.localw = parseInt(this.lastW) + parseInt(e.clientX) - parseInt(this.resizeStartX);
-        this.localh = parseInt(this.lastH) + parseInt(e.clientY) - parseInt(this.resizeStartY);
-      }
-      if (this.rotating) {
-        this.localr = parseInt(this.r) + this.getRotateAngle(e.clientX, e.clientY);
-      }
-    }
-  },
-
-  data: function () {
-    return {
-      localx: this.x,
-      localy: this.y,
-      localw: this.w,
-      localh: this.h,
-      localr: this.r,
-      lastX: 0,
-      lastY: 0,
-      dragging: false,
-      rotate: 0,
-      resizeStartX: 0,
-      resizeStartY: 0,
-      rotateStartX: 0,
-      rotateStartY: 0,
-      resizing: false
-    };
-  },
-  computed: {
-    boxStyle: function () {
-      return {
-        width: this.localw + 'px',
-        height: this.localh + 'px',
-        transform: 'translate(' + this.localx + 'px,' + this.localy + 'px) rotate(' + this.localr + 'deg)'
-      };
-    }
-  }
-};
-})()
-if (module.exports.__esModule) module.exports = module.exports.default
-var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
-if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"dragable",style:(_vm.boxStyle),on:{"mousedown":_vm.handleDown,"mouseup":_vm.handleUp}},[_vm._t("default"),_vm._v(" "),_c('div',{staticClass:"rotate",on:{"mousedown":function($event){$event.stopPropagation();_vm.rotateStart($event)}}}),_vm._v(" "),_c('div',{staticClass:"scale",on:{"mousedown":function($event){$event.stopPropagation();_vm.resizeStart($event)}}})],2)}
-__vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-08d355fc"
-if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  module.hot.dispose(__vueify_style_dispose__)
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-08d355fc", __vue__options__)
-  } else {
-    hotAPI.rerender("data-v-08d355fc", __vue__options__)
-  }
-})()}
-},{"victor":28,"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],38:[function(require,module,exports){
+},{"vue":30,"vue-hot-reload-api":28,"vueify/lib/insert-css":31}],36:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#remove {\n  z-index: 10000;\n}")
 ;(function(){
 
@@ -17772,7 +16179,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-c1df6a46", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],39:[function(require,module,exports){
+},{"vue":30,"vue-hot-reload-api":28,"vueify/lib/insert-css":31}],37:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-group {\n  position: fixed;\n  bottom: 25px;\n  right: 25px;\n}\n.nav-wrapper > p {\n  margin: 0 25px;\n}\n.container {\n  margin-top: 50px;\n}")
 ;(function(){
 
@@ -17809,7 +16216,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-46a4b1e6", __vue__options__)
   }
 })()}
-},{"./Group.vue":38,"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],40:[function(require,module,exports){
+},{"./Group.vue":36,"vue":30,"vue-hot-reload-api":28,"vueify/lib/insert-css":31}],38:[function(require,module,exports){
 'use strict';
 
 var Vue = require('vue');
@@ -17839,7 +16246,7 @@ new Vue({
 	store: new Vuex.Store(store)
 });
 
-},{"./components/App.vue":34,"./components/Constructor.vue":35,"./components/CreateGroup.vue":36,"./components/Groups.vue":39,"./store":41,"vue":31,"vue-router":30,"vuex":33}],41:[function(require,module,exports){
+},{"./components/App.vue":33,"./components/Constructor.vue":34,"./components/CreateGroup.vue":35,"./components/Groups.vue":37,"./store":39,"vue":30,"vue-router":29,"vuex":32}],39:[function(require,module,exports){
 'use strict';
 
 var axios = require('axios');
@@ -17856,6 +16263,25 @@ module.exports = {
       'oxxxyof6': 'img/bg.jpg',
       'oxxxyof7': 'img/bg.jpg'
     },
+    fonts: {
+      'Bebas': 'Bebas Uane',
+      'Roboto': 'Roboto Regular',
+      'Arial': 'Arial'
+    },
+    bars: [{
+      progress: 'img/bar.png',
+      stand: 'img/bar.png',
+      border: 5,
+      stand_color: '#FF3300',
+      progress_color: '#FFFFFF',
+      w: 300,
+      h: 31
+    }, {
+      progress: 'img/bar2.png',
+      stand: 'img/bar.png',
+      w: 200,
+      h: 50
+    }],
     group: {},
     api: 'vk-donatelo.herokuapp.com'
   },
@@ -17867,7 +16293,6 @@ module.exports = {
       state.group = data;
     },
     removeGroup: function removeGroup(state, gid) {
-      console.log(gid);
       state.groups.$remove(gid);
     }
   },
@@ -17899,10 +16324,9 @@ module.exports = {
     removeGroup: function removeGroup(_ref4, gid) {
       var commit = _ref4.commit;
 
-      console.log(gid);
       commit('removeGroup', gid);
     }
   }
 };
 
-},{"axios":1}]},{},[40]);
+},{"axios":1}]},{},[38]);

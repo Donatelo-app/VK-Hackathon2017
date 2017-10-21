@@ -12,6 +12,28 @@ module.exports = {
       'oxxxyof6': 'img/bg.jpg',
       'oxxxyof7': 'img/bg.jpg',
     },
+    fonts: {
+      'Bebas': 'Bebas Uane',
+      'Roboto': 'Roboto Regular',
+      'Arial': 'Arial'
+    },
+    bars: [
+      {
+        progress: 'img/bar.png',
+        stand: 'img/bar.png',
+        border: 5,
+        stand_color: '#FF3300',
+        progress_color: '#FFFFFF',
+        w: 300,
+        h: 31
+      },
+      {
+        progress: 'img/bar2.png',
+        stand: 'img/bar.png',
+        w: 200,
+        h: 50
+      }
+    ],
     group: {},
     api: 'vk-donatelo.herokuapp.com'
   },

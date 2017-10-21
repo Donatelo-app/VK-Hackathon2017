@@ -1,17 +1,16 @@
 <template>
   <div id="create-group">
-    <div id="add-wallpaper">
-      <div id="preview-image" :style="{backgroundImage: 'url(' + image + ')'}"></div>
-      <input type="file" id="select-image" @change="onFileChange" required>
-      <p class="flow-text">Загрузите обложку группы</p>
-    </div>
+    <form @submit.prevent="createGroup">
 
-    <div class="container">
-      <h1 class="label"></h1>
-      <div class="row">
-        <form class="col s12" @submit.prevent="createGroup">
+      <div id="add-wallpaper">
+        <div id="preview-image" :style="{backgroundImage: 'url(' + image + ')'}"></div>
+        <input type="file" id="select-image" @change="onFileChange" required>
+        <p class="flow-text">Загрузите обложку группы</p>
+      </div>
+
+      <div class="container">
+        <div class="row">
           <p class="flow-text">Укажите данные группы:</p>
-
           <div class="row">
             <div class="input-field col s12">
               <input id="gid" type="text" required class="validate">
@@ -33,9 +32,9 @@
             </div>
           </div>
           <button type="submit" class="col s12 waves-effect waves-light btn btn-large vk-color"><i class="material-icons left">navigate_next</i>Перейти к редактированию</button>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -73,7 +72,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   #add-wallpaper {
     cursor: pointer;
     height: 200px;
