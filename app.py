@@ -49,6 +49,11 @@ def update_group():
 	group_id = data["gid"]
 
 	new_info = data["info"]
+
+
+	if "base64," in new_info["cover"]["background"]:
+		new_info["cover"]["background"] = new_info["cover"]["background"].split("base64,")[1]
+
 	old_info = base.get("%s:%s:info" % (user_id, group_id), default={})
 
 	if type(new_info) is not dict: return  "", 400
