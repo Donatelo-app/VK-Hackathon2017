@@ -73,20 +73,19 @@ def update_group():
 
 
 
-	info = base.get("%s:%s:info" % (user_id, group_id), default={})
-	base.set("%s:%s:info" % (user_id, group_id), info)
-	
-	cur_balance = get_balance(info["wallets"])
-	cover = draw_cover(info["cover"], cur_balance)
+	old_info = base.get("%s:%s:info" % (user_id, group_id), default={})
+	cur_balance = get_balance(old_info["wallets"])
+	cover = draw_cover(old_info["cover"], cur_balance)
 
 
 	img = BytesIO()
 	cover.save(img, format="png")
 	img.seek(0)
 
-	info["render_cover"] = encodebytes(img.getvalue()).decode()
+	old_info["render_cover"] = encodebytes(img.getvalue()).decode()
+	base.set("%s:%s:info" % (user_id, group_id), old_info)
 
-	update_cover(group_id, info["token"], img)
+	update_cover(group_id, old_info["token"], img)
 
 
 
