@@ -28,7 +28,7 @@
   #remove {
     z-index: 10000;
   }
-  .card {
+  .card, .card-panel {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14);
   }
 </style>

@@ -1,27 +1,38 @@
 <template>
   <div id="constructor">
+    <nav>
+      <div class="nav-wrapper vk-color">
+        <p class="flow-text">Редактор обложки:</p>
+      </div>
+    </nav>
     <canvas id="playground"></canvas>
     <div class="container">
       <div class="row">
         <div class="col s3">
-          <div @click="addNewTextNode" class="card-panel">
-            Add text
+          <div @click="addNewTextNode" class="card-panel hoverable">
+            <i class="material-icons">text_format</i>
+            <p>Добавить текст</p>
           </div>
         </div>
         <div class="col s3">
-          <div @click="addNewProgressBar" class="card-panel">
-            Bar 1
+          <div @click="addNewProgressBar" class="card-panel hoverable">
+            <i class="material-icons">format_align_left</i>
+            <p>Cтандарный бар</p>
           </div>
         </div>
         <div class="col s3">
-          <div class="card-panel">
-            Bar 2
+          <div class="card-panel hoverable">
+            <i class="material-icons">extension</i>
+            <p>Загрузить бар</p>
           </div>
         </div>
         <div class="col s3">
-          <div class="card-panel">
-            Bar 3
-          </div>
+          <router-link :to="{path: 'info_group', query: {gid}}">
+            <div class="card-panel hoverable">
+              <i class="material-icons">settings</i>
+              <p>Настроики</p>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -141,7 +152,7 @@
               top: y*this.scale-h*this.scale/2,
             });
             group.setOriginToCenter();
-            group.angle = 180+ data.angle;
+            group.angle = data.angle;
             group.id = this.idNodes++;
             group.selection = true;
             group.progress = src_progress;
@@ -184,12 +195,27 @@
 </script>
 
 <style scoped>
+  .container {
+    margin-top: 10px;
+  }
   .col {
     padding: 0 5px;
     border-radius: 10px;
   }
   .card-panel {
+    border-radius: 7px;
+    cursor: pointer;
     height: 150px;
+    text-align: center;
+    background: -webkit-linear-gradient(#5e81a8, #b660bb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .card-panel i {
+    background: -webkit-linear-gradient(#5e81a8, #b660bb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3em;
   }
   button {
     position: fixed;
