@@ -45,13 +45,13 @@ def draw_text(image, text, font, size, point, collor_code="#FFFFFFFF"):
     d = ImageDraw.Draw(image)
     d.text(point, text, font=fnt, fill=collor)
     
-    return bg
+    return image
 
 
 def draw_lineral(image, json, percent):
-    progress = Image.open(BytesIO(decodebytes(json["progress"])))
+    progress = Image.open(BytesIO(decodebytes(json["progress"].encode())))
     if json["stand"] is not None:  
-        stand = Image.open(BytesIO(decodebytes(json["stand"])))
+        stand = Image.open(BytesIO(decodebytes(json["stand"].encode())))
     else:
         stand = None
     
@@ -73,8 +73,8 @@ def draw_textview(image, json, percent, current_sum, total):
     return image
 
 
-def draw_head(json, current_sum):
-    image = Image.open(BytesIO(decodebytes(json["background"])))
+def draw_cover(json, current_sum):
+    image = Image.open(BytesIO(decodebytes(json["background"].encode())))
     total = json["total"]
     if current_sum == 0: total = 1
     

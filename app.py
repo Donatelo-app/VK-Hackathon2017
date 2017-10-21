@@ -2,6 +2,13 @@ from flask import Flask, request
 from flask_cors import CORS
 from base import Base
 import json
+from io import BytesIO
+
+import random
+
+from draw import draw_cover
+from vk_utils import update_cover
+from base64 import encodebytes, decodebytes
 
 app = Flask(__name__)
 CORS(app)
@@ -49,6 +56,8 @@ def update_group():
 	for key in new_info:
 		old_info[key] = new_info[key]
 
+	if "render_cover" not in old_info["info"]:
+		old_info["info"]["render_cover"] = old_info["info"]["cover"]["background"].decode()
 
 	group_list = base.get("%s:list" % user_id, default=[])
 	base.set("%s:%s:info" % (user_id, group_id), old_info)
@@ -59,8 +68,8 @@ def update_group():
 
 
 	full_groups_list = base.get("group-list", default=[])
-	if group_id not in full_groups_list: full_groups_list.append(group_id)
-	base.get("group-list", full_groups_list)
+	if "%s:%s" % (user_id, group_id) not in full_groups_list: full_groups_list.append("%s:%s" % (user_id, group_id))
+	base.set("group-list", full_groups_list)
 
 
 	return "", 200
@@ -78,7 +87,22 @@ def update_heads():
 	groups_list = base.get("group-list", default=[])
 
 	for gid in groups_list:
-		pass
+		info = base.get("%s:info" % gid, default={})
+
+		cover = draw_cover(info["cover"], random.randint(1,2000))
+
+
+		img = BytesIO()
+		cover.save(img, format="png")
+		img.seek(0)
+
+		info["render_cover"] = encodebytes(img.getvalue()).decode()
+		base.set("%s:info" % gid, info)
+
+		update_cover(gid.split(":")[1], info["token"], img)
+
+
+	return "",200
 
 if __name__ == "__main__":
 	app.run()

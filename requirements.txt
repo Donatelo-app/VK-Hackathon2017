@@ -2,3 +2,7 @@ gunicorn
 flask
 pymongo
 flask_cors
+vk
+Pillow
+jinja2
+redis
