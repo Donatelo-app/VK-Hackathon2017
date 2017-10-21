@@ -12,7 +12,6 @@ def bitcoin_balance(address):
 		res = requests.get("https://blockchain.info/balance?active=%s" % address).json()
 
 		balance = res[address]["final_balance"]
-		device_id
 		res = requests.get("https://blockchain.info/ticker").json()
 
 		currency = res["RUB"]["buy"]
