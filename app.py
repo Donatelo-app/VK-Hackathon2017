@@ -128,5 +128,18 @@ def update_heads():
 
 	return "",200
 
+
+def delete():
+	user_id = request.args["uid"]
+	group_id = request.args["gid"]
+
+	group_list = base.get("%s:list" % user_id, default=[])
+	group_list.remove(group_id)
+	base.set("%s:list" % user_id, group_list)
+
+	return "", 200
+
+
+
 if __name__ == "__main__":
 	app.run()
