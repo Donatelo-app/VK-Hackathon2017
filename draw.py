@@ -78,7 +78,7 @@ def draw_cover(json, current_sum):
     total = json["total"]
     if current_sum == 0: total = 1
     
-    percent = int(current_sum/total*100)
+    percent = int(float(current_sum)/float(total)*100)
     for view in json["views"]:
         try:
             if view["type"] == "lineral":
