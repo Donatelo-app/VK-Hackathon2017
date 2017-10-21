@@ -1,3 +1,5 @@
+import requests
+
 def get_balance(wallets):
 	return bitcoin_balance(wallets["bitcoin"])
 
