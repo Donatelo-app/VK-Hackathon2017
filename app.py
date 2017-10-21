@@ -53,9 +53,7 @@ def update_group():
 	if type(new_info) is not dict: return  "", 400
 
 
-	for key in new_info:
-		old_info[key] = new_info[key]
-
+	old_info = new_info
 	if "render_cover" not in old_info["info"]:
 		old_info["info"]["render_cover"] = old_info["info"]["cover"]["background"].decode()
 
