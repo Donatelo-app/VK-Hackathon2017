@@ -40,10 +40,18 @@ def update_group():
 	user_id = data["uid"]
 	group_id = data["gid"]
 
-	info = data["info"]
+	new_info = data["info"]
+	old_info = base.get("%s:%s:info" % (user_id, group_id), default={})
+
+	if type(new_info) is not dict: return  "", 400
+
+
+	for key in new_info:
+		old_info[key] = new_info[key]
+
 
 	group_list = base.get("%s:list" % user_id, default=[])
-	base.set("%s:%s:info" % (user_id, group_id), info)
+	base.set("%s:%s:info" % (user_id, group_id), old_info)
 
 	group_list = base.get("%s:list" % user_id, default=[])
 	if group_id not in group_list: group_list.append(group_id)
