@@ -12,4 +12,4 @@ def bitcoin_balance(address):
 	res = requests.get("https://blockchain.info/ticker").json()
 
 	currency = res["RUB"]["buy"]
-	return balance*currency
+	return round(balance*currency/10**8,2)
