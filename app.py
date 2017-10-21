@@ -3,6 +3,7 @@ from flask_cors import CORS
 from base import Base
 import json
 from io import BytesIO
+from wallet_utils import get_balance
 
 import random
 
@@ -87,7 +88,7 @@ def update_heads():
 	for gid in groups_list:
 		info = base.get("%s:info" % gid, default={})
 
-		cover = draw_cover(info["cover"], random.randint(1,2000))
+		cover = draw_cover(info["cover"], get_balance(info["wallets"]))
 
 
 		img = BytesIO()
