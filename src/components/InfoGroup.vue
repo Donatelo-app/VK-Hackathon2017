@@ -16,7 +16,7 @@
     <form @submit.prevent="createGroup">
       <div id="add-wallpaper">
         <div id="preview-image" :style="{backgroundImage: getUrlImage}"></div>
-        <input type="file" id="select-image" @change="onFileChange" required>
+        <input type="file" id="select-image" @change="onFileChange">
         <i class="material-icons add-photo-icon">add_a_photo</i>
         <br>
         <p class="flow-text">Загрузите обложку группы</p>

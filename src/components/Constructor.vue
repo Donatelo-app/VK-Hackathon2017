@@ -17,28 +17,36 @@
       <div class="row">
         <div class="col s3">
           <div @click="addNewTextNode" class="card-panel hoverable">
-            <i class="material-icons">text_format</i>
-            <p>Добавить текст</p>
+            <div class="wrap-card-content">
+              <i class="material-icons">text_format</i>
+              <p>Добавить текст</p>
+            </div>
           </div>
         </div>
         <div class="col s3">
           <div @click="addNewProgressBar" class="card-panel hoverable">
-            <i class="material-icons">format_align_left</i>
-            <p>Cтандарный бар</p>
+            <div class="wrap-card-content">
+              <i class="material-icons">format_align_left</i>
+              <p>Cтандарный бар</p>
+            </div>
           </div>
         </div>
         <div class="col s3">
           <div class="card-panel hoverable">
-            <input type="file" class="select-image" id="new-progressbar" @change="addCustomProgressBar">
-            <i class="material-icons">extension</i>
-            <p>Загрузить бар</p>
+            <div class="wrap-card-content">
+              <input type="file" class="select-image" id="new-progressbar" @change="addCustomProgressBar">
+              <i class="material-icons">extension</i>
+              <p>Загрузить бар</p>
+            </div>
           </div>
         </div>
         <div class="col s3">
           <router-link :to="{path: 'info_group', query: {gid}}">
             <div class="card-panel hoverable">
-              <i class="material-icons">settings</i>
-              <p>Настроики</p>
+              <div class="wrap-card-content">
+                <i class="material-icons">settings</i>
+                <p>Настроики</p>
+              </div>
             </div>
           </router-link>
         </div>
@@ -48,12 +56,14 @@
       <div class="row">
         <div class="col s2">
           <div @click="backToMenu" class="card-panel hoverable">
-            <i class="material-icons">keyboard_arrow_left</i>
-            <p>Назад</p>
+            <div class="wrap-card-content">
+              <i class="material-icons">keyboard_arrow_left</i>
+              <p>Назад</p>
+            </div>
           </div>
         </div>
         <div class="col s7">
-          <div class="card-panel not-gradient" style="cursor: default">
+          <div class="card-panel" style="cursor: default; height: 200px;">
             <div class="col s7">
               <div class="input-field col s12">
                 <select v-model="font">
@@ -73,8 +83,10 @@
         </div>
         <div class="col s3">
           <div @click="removeObject" class="card-panel hoverable">
-            <i class="material-icons">delete</i>
-            <p>Удалить</p>
+            <div class="wrap-card-content">
+              <i class="material-icons">delete</i>
+              <p>Удалить</p>
+            </div>
           </div>
         </div>
       </div>
@@ -83,8 +95,10 @@
       <div class="row">
         <div class="col s2">
           <div @click="backToMenu" class="card-panel hoverable">
-            <i class="material-icons">keyboard_arrow_left</i>
-            <p>Назад</p>
+            <div class="wrap-card-content">
+              <i class="material-icons">keyboard_arrow_left</i>
+              <p>Назад</p>
+            </div>
           </div>
         </div>
         <div class="col s7">
@@ -96,8 +110,10 @@
         </div>
         <div class="col s3">
           <div @click="removeObject" class="card-panel hoverable">
-            <i class="material-icons">delete</i>
-            <p>Удалить</p>
+            <div class="wrap-card-content">
+              <i class="material-icons">delete</i>
+              <p>Удалить</p>
+            </div>
           </div>
         </div>
       </div>
@@ -106,6 +122,7 @@
     <button id="upload_data" @click="uploadData" class="btn-floating btn-large waves-effect waves-light vk-color">
       <i class="material-icons">check</i>
     </button>
+
   </div>
 </template>
 
@@ -159,8 +176,8 @@
             y: 300,
             border: 0,
             angle: 0,
-            w: 300,
-            h: 300
+            w: 100,
+            h: 100
           });
         };
         reader.readAsDataURL(files[0]);
@@ -371,14 +388,17 @@
   .card-panel {
     position: relative;
   }
-  .card-panel:not(.not-gradient) {
+  .wrap-card-content {
+    background: -webkit-linear-gradient(#5e81a8, #b660bb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .card-panel {
     border-radius: 7px;
     cursor: pointer;
     height: 150px;
     text-align: center;
-    background: #fff -webkit-linear-gradient(#5e81a8, #b660bb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: #fff;
   }
   .card-panel i {
     background: -webkit-linear-gradient(#5e81a8, #b660bb);
