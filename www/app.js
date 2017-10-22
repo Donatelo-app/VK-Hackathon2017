@@ -15988,10 +15988,26 @@ module.exports = index;
 
 }).call(this,require('_process'))
 },{"_process":27}],34:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n}\n.vk-color {\n  background: #5e81a8 !important;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n  background: #dfe3e6;\n}\n.vk-color {\n  background: #5e81a8 !important;\n}")
+;(function(){
+
+
+const Preload = require('./Preload.vue');
+module.exports = {
+  components: {
+    Preload
+  },
+  computed: {
+    load() {
+      return this.$store.state.load;
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('router-view')],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('router-view'),_vm._v(" "),_c('preload',{directives:[{name:"show",rawName:"v-show",value:(_vm.load),expression:"load"}]})],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16004,8 +16020,8 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-dc887202", __vue__options__)
   }
 })()}
-},{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],35:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-72446a58] {\n  margin-top: 10px;\n}\n.col[data-v-72446a58] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.vc-chrome[data-v-72446a58] {\n  width: 100%;\n  margin-top: 13px;\n  box-shadow: none;\n}\n.select-image[data-v-72446a58] {\n  cursor: pointer;\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n}\n.not-gradient[data-v-72446a58] {\n  height: 200px;\n}\n.vc-chrome-fields-wrap[data-v-72446a58] {\n    display: none;\n}\n.card-panel[data-v-72446a58] {\n  position: relative;\n}\n.card-panel[data-v-72446a58]:not(.not-gradient) {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel i[data-v-72446a58] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}\nbutton[data-v-72446a58] {\n  position: fixed;\n  bottom: 25px;\n  right: 25px;\n}")
+},{"./Preload.vue":39,"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],35:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-72446a58] {\n  margin-top: 10px;\n}\n.col[data-v-72446a58] {\n  padding: 0 5px;\n  border-radius: 10px;\n}\n.vc-chrome[data-v-72446a58] {\n  width: 100%;\n  margin-top: 13px;\n  box-shadow: none;\n}\n.select-image[data-v-72446a58] {\n  cursor: pointer;\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n}\n.not-gradient[data-v-72446a58] {\n  height: 200px;\n}\n.vc-chrome-fields-wrap[data-v-72446a58] {\n    display: none;\n}\n.card-panel[data-v-72446a58] {\n  position: relative;\n}\n.card-panel[data-v-72446a58]:not(.not-gradient) {\n  border-radius: 7px;\n  cursor: pointer;\n  height: 150px;\n  text-align: center;\n  background: #fff -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n}\n.card-panel i[data-v-72446a58] {\n  background: -webkit-linear-gradient(#5e81a8, #b660bb);\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  font-size: 3em;\n}\nbutton[data-v-72446a58] {\n  position: fixed;\n  bottom: 25px;\n  right: 25px;\n}")
 ;(function(){
 
 
@@ -16240,8 +16256,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"constructor"}},[_vm._m(0),_vm._v(" "),_c('canvas',{attrs:{"id":"playground"}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.openTab === 'menu'),expression:"openTab === 'menu'"}],staticClass:"container",attrs:{"id":"menu"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.addNewTextNode}},[_c('i',{staticClass:"material-icons"},[_vm._v("text_format")]),_vm._v(" "),_c('p',[_vm._v("Добавить текст")])])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.addNewProgressBar}},[_c('i',{staticClass:"material-icons"},[_vm._v("format_align_left")]),_vm._v(" "),_c('p',[_vm._v("Cтандарный бар")])])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('input',{staticClass:"select-image",attrs:{"type":"file","id":"new-progressbar"},on:{"change":_vm.addCustomProgressBar}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("extension")]),_vm._v(" "),_c('p',[_vm._v("Загрузить бар")])])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('router-link',{attrs:{"to":{path: 'info_group', query: {gid: _vm.gid}}}},[_c('div',{staticClass:"card-panel hoverable"},[_c('i',{staticClass:"material-icons"},[_vm._v("settings")]),_vm._v(" "),_c('p',[_vm._v("Настроики")])])])],1)])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.openTab === 'text'),expression:"openTab === 'text'"}],staticClass:"container",attrs:{"id":"text"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s2"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.backToMenu}},[_c('i',{staticClass:"material-icons"},[_vm._v("keyboard_arrow_left")]),_vm._v(" "),_c('p',[_vm._v("Назад")])])]),_vm._v(" "),_c('div',{staticClass:"col s7"},[_c('div',{staticClass:"card-panel not-gradient",staticStyle:{"cursor":"default"}},[_c('div',{staticClass:"col s7"},[_c('div',{staticClass:"input-field col s12"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.font),expression:"font"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.font=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},[_c('option',{attrs:{"value":"BEBAS","selected":""}},[_vm._v("BEBAS")])]),_vm._v(" "),_c('label',[_vm._v("Шрифт")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.fontsize),expression:"fontsize"}],staticClass:"validate",attrs:{"id":"fontsize","type":"number","required":""},domProps:{"value":(_vm.fontsize)},on:{"input":function($event){if($event.target.composing){ return; }_vm.fontsize=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"fontsize"}},[_vm._v("Размер:")])])]),_vm._v(" "),_c('div',{staticClass:"col s5"},[_c('chrome-picker',{on:{"input":_vm.updateColor},model:{value:(_vm.colors),callback:function ($$v) {_vm.colors=$$v},expression:"colors"}})],1)])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.removeObject}},[_c('i',{staticClass:"material-icons"},[_vm._v("delete")]),_vm._v(" "),_c('p',[_vm._v("Удалить")])])])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.openTab === 'progressbar'),expression:"openTab === 'progressbar'"}],staticClass:"container",attrs:{"id":"progressbar"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s2"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.backToMenu}},[_c('i',{staticClass:"material-icons"},[_vm._v("keyboard_arrow_left")]),_vm._v(" "),_c('p',[_vm._v("Назад")])])]),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.removeObject}},[_c('i',{staticClass:"material-icons"},[_vm._v("delete")]),_vm._v(" "),_c('p',[_vm._v("Удалить")])])])])]),_vm._v(" "),_c('button',{staticClass:"btn-floating btn-large waves-effect waves-light vk-color",attrs:{"id":"upload_data"},on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("check")])])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper vk-color"},[_c('p',{staticClass:"flow-text"},[_vm._v("Редактор обложки:")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col s7"},[_c('div',{staticClass:"card-panel hoverable"},[_c('input',{staticClass:"select-image",attrs:{"type":"file","editCurrentProgressBar":""}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("mode_edit")]),_vm._v(" "),_c('p',[_vm._v("Заменить исходную картинку")])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"constructor"}},[_c('nav',[_c('div',{staticClass:"nav-wrapper vk-color"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s1",staticStyle:{"text-align":"center"}},[_c('router-link',{attrs:{"to":'groups'}},[_c('i',{staticClass:"material-icons"},[_vm._v("apps")])])],1),_vm._v(" "),_vm._m(0)])])]),_vm._v(" "),_c('canvas',{attrs:{"id":"playground"}}),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.openTab === 'menu'),expression:"openTab === 'menu'"}],staticClass:"container",attrs:{"id":"menu"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.addNewTextNode}},[_c('i',{staticClass:"material-icons"},[_vm._v("text_format")]),_vm._v(" "),_c('p',[_vm._v("Добавить текст")])])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.addNewProgressBar}},[_c('i',{staticClass:"material-icons"},[_vm._v("format_align_left")]),_vm._v(" "),_c('p',[_vm._v("Cтандарный бар")])])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable"},[_c('input',{staticClass:"select-image",attrs:{"type":"file","id":"new-progressbar"},on:{"change":_vm.addCustomProgressBar}}),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("extension")]),_vm._v(" "),_c('p',[_vm._v("Загрузить бар")])])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('router-link',{attrs:{"to":{path: 'info_group', query: {gid: _vm.gid}}}},[_c('div',{staticClass:"card-panel hoverable"},[_c('i',{staticClass:"material-icons"},[_vm._v("settings")]),_vm._v(" "),_c('p',[_vm._v("Настроики")])])])],1)])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.openTab === 'text'),expression:"openTab === 'text'"}],staticClass:"container",attrs:{"id":"text"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s2"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.backToMenu}},[_c('i',{staticClass:"material-icons"},[_vm._v("keyboard_arrow_left")]),_vm._v(" "),_c('p',[_vm._v("Назад")])])]),_vm._v(" "),_c('div',{staticClass:"col s7"},[_c('div',{staticClass:"card-panel not-gradient",staticStyle:{"cursor":"default"}},[_c('div',{staticClass:"col s7"},[_c('div',{staticClass:"input-field col s12"},[_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.font),expression:"font"}],on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.font=$event.target.multiple ? $$selectedVal : $$selectedVal[0]}}},[_c('option',{attrs:{"value":"BEBAS","selected":""}},[_vm._v("BEBAS")])]),_vm._v(" "),_c('label',[_vm._v("Шрифт")])]),_vm._v(" "),_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.fontsize),expression:"fontsize"}],staticClass:"validate",attrs:{"id":"fontsize","type":"number","required":""},domProps:{"value":(_vm.fontsize)},on:{"input":function($event){if($event.target.composing){ return; }_vm.fontsize=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"fontsize"}},[_vm._v("Размер:")])])]),_vm._v(" "),_c('div',{staticClass:"col s5"},[_c('chrome-picker',{on:{"input":_vm.updateColor},model:{value:(_vm.colors),callback:function ($$v) {_vm.colors=$$v},expression:"colors"}})],1)])]),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.removeObject}},[_c('i',{staticClass:"material-icons"},[_vm._v("delete")]),_vm._v(" "),_c('p',[_vm._v("Удалить")])])])])]),_vm._v(" "),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.openTab === 'progressbar'),expression:"openTab === 'progressbar'"}],staticClass:"container",attrs:{"id":"progressbar"}},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s2"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.backToMenu}},[_c('i',{staticClass:"material-icons"},[_vm._v("keyboard_arrow_left")]),_vm._v(" "),_c('p',[_vm._v("Назад")])])]),_vm._v(" "),_c('div',{staticClass:"col s7"}),_vm._v(" "),_c('div',{staticClass:"col s3"},[_c('div',{staticClass:"card-panel hoverable",on:{"click":_vm.removeObject}},[_c('i',{staticClass:"material-icons"},[_vm._v("delete")]),_vm._v(" "),_c('p',[_vm._v("Удалить")])])])])]),_vm._v(" "),_c('button',{staticClass:"btn-floating btn-large waves-effect waves-light vk-color",attrs:{"id":"upload_data"},on:{"click":_vm.uploadData}},[_c('i',{staticClass:"material-icons"},[_vm._v("check")])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col s11"},[_c('p',{staticClass:"flow-text",staticStyle:{"margin":"0"}},[_vm._v("Редактор обложки:")])])}]
 __vue__options__._scopeId = "data-v-72446a58"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16251,7 +16267,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72446a58", __vue__options__)
   } else {
-    hotAPI.reload("data-v-72446a58", __vue__options__)
+    hotAPI.rerender("data-v-72446a58", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-color/dist/vue-color.min.js":28,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],36:[function(require,module,exports){
@@ -16271,7 +16287,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card"},[_c('router-link',{attrs:{"to":{path: 'edit', query: {gid: _vm.gid}}}},[_c('div',{staticClass:"card-image waves-effect"},[_c('img',{attrs:{"src":'data:image/png;base64,' + _vm.image}})])]),_vm._v(" "),_c('div',{staticClass:"card-content"},[_c('span',{staticClass:"card-title activator grey-text text-darken-4"},[_vm._v("OXXXYMIRON OFFICIAL\n        "),_c('i',{staticClass:"material-icons right waves-effect",attrs:{"id":"remove"},on:{"click":_vm.removeGroup}},[_vm._v("close")])])])],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card"},[_c('router-link',{attrs:{"to":{path: 'edit', query: {gid: _vm.gid}}}},[_c('div',{staticClass:"card-image waves-effect"},[_c('img',{attrs:{"src":'data:image/png;base64,' + _vm.image}})])])],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16285,7 +16301,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],37:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-group {\n  position: fixed;\n  bottom: 25px;\n  right: 25px;\n}\n.nav-wrapper > p {\n  margin: 0 25px;\n}\n.container {\n  margin-top: 50px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#add-group {\n  position: fixed;\n  bottom: 25px;\n  right: 25px;\n}\n.nav-wrapper > p {\n  margin: 0 25px;\n}\n.container {\n  margin: 50px auto;\n}")
 ;(function(){
 
 
@@ -16391,8 +16407,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"create-group"}},[_vm._m(0),_vm._v(" "),_c('form',{on:{"submit":function($event){$event.preventDefault();_vm.createGroup($event)}}},[_c('div',{attrs:{"id":"add-wallpaper"}},[_c('div',{style:({backgroundImage: _vm.getUrlImage}),attrs:{"id":"preview-image"}}),_vm._v(" "),_c('input',{attrs:{"type":"file","id":"select-image","required":""},on:{"change":_vm.onFileChange}}),_vm._v(" "),_c('i',{staticClass:"material-icons add-photo-icon"},[_vm._v("add_a_photo")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])]),_vm._v(" "),_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Укажите данные группы:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.groupId),expression:"groupId"}],staticClass:"validate",attrs:{"id":"gid","disabled":_vm.isBlockEditGroupId,"type":"text","required":""},domProps:{"value":(_vm.groupId)},on:{"input":function($event){if($event.target.composing){ return; }_vm.groupId=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"gid"}},[_vm._v("ID группы")])])]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.tokenGroup),expression:"tokenGroup"}],staticClass:"validate",attrs:{"id":"token","type":"text","required":""},domProps:{"value":(_vm.tokenGroup)},on:{"input":function($event){if($event.target.composing){ return; }_vm.tokenGroup=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"token"}},[_vm._v("Токен группу")])])]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Ваши реквезиты:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.bitcoinWallet),expression:"bitcoinWallet"}],staticClass:"validate",attrs:{"id":"bitcoin","type":"text"},domProps:{"value":(_vm.bitcoinWallet)},on:{"input":function($event){if($event.target.composing){ return; }_vm.bitcoinWallet=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"token"}},[_vm._v("Биткоин кошелек")])])]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.tinkoffWallet),expression:"tinkoffWallet"}],staticClass:"validate",attrs:{"id":"tinkoff","type":"text"},domProps:{"value":(_vm.tinkoffWallet)},on:{"input":function($event){if($event.target.composing){ return; }_vm.tinkoffWallet=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"token"}},[_vm._v("Тинькофф банк")])])]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Сумма сбора:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.total),expression:"total"}],staticClass:"validate",attrs:{"id":"total","type":"number","required":""},domProps:{"value":(_vm.total)},on:{"input":function($event){if($event.target.composing){ return; }_vm.total=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"total"}},[_vm._v("Рублей:")])])]),_vm._v(" "),_vm._m(1)])])])])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper vk-color"},[_c('p',{staticClass:"flow-text"},[_vm._v("Базовая информация о группе:")])])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{staticClass:"col s12 waves-effect waves-light btn btn-large vk-color",attrs:{"type":"submit"}},[_c('i',{staticClass:"material-icons left"},[_vm._v("navigate_next")]),_vm._v("Перейти к редактированию")])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"create-group"}},[_c('nav',[_c('div',{staticClass:"nav-wrapper vk-color"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s1",staticStyle:{"text-align":"center"}},[_c('router-link',{attrs:{"to":'groups'}},[_c('i',{staticClass:"material-icons"},[_vm._v("apps")])])],1),_vm._v(" "),_vm._m(0)])])]),_vm._v(" "),_c('form',{on:{"submit":function($event){$event.preventDefault();_vm.createGroup($event)}}},[_c('div',{attrs:{"id":"add-wallpaper"}},[_c('div',{style:({backgroundImage: _vm.getUrlImage}),attrs:{"id":"preview-image"}}),_vm._v(" "),_c('input',{attrs:{"type":"file","id":"select-image","required":""},on:{"change":_vm.onFileChange}}),_vm._v(" "),_c('i',{staticClass:"material-icons add-photo-icon"},[_vm._v("add_a_photo")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Загрузите обложку группы")])]),_vm._v(" "),_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('p',{staticClass:"flow-text"},[_vm._v("Укажите данные группы:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.groupId),expression:"groupId"}],staticClass:"validate",attrs:{"id":"gid","disabled":_vm.isBlockEditGroupId,"type":"text","required":""},domProps:{"value":(_vm.groupId)},on:{"input":function($event){if($event.target.composing){ return; }_vm.groupId=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"gid"}},[_vm._v("ID группы")])])]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.tokenGroup),expression:"tokenGroup"}],staticClass:"validate",attrs:{"id":"token","type":"text","required":""},domProps:{"value":(_vm.tokenGroup)},on:{"input":function($event){if($event.target.composing){ return; }_vm.tokenGroup=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"token"}},[_vm._v("Токен группу")])])]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Ваши реквезиты:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.bitcoinWallet),expression:"bitcoinWallet"}],staticClass:"validate",attrs:{"id":"bitcoin","type":"text"},domProps:{"value":(_vm.bitcoinWallet)},on:{"input":function($event){if($event.target.composing){ return; }_vm.bitcoinWallet=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"token"}},[_vm._v("Биткоин кошелек")])])]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.tinkoffWallet),expression:"tinkoffWallet"}],staticClass:"validate",attrs:{"id":"tinkoff","type":"text"},domProps:{"value":(_vm.tinkoffWallet)},on:{"input":function($event){if($event.target.composing){ return; }_vm.tinkoffWallet=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"token"}},[_vm._v("Тинькофф банк")])])]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Сумма сбора:")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"input-field col s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.total),expression:"total"}],staticClass:"validate",attrs:{"id":"total","type":"number","required":""},domProps:{"value":(_vm.total)},on:{"input":function($event){if($event.target.composing){ return; }_vm.total=$event.target.value}}}),_vm._v(" "),_c('label',{staticClass:"active",attrs:{"for":"total"}},[_vm._v("Рублей:")])])]),_vm._v(" "),_vm._m(1)])])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col s11"},[_c('p',{staticClass:"flow-text",staticStyle:{"margin":"0"}},[_vm._v("Базовая информация о группе:")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('button',{staticClass:"col s12 waves-effect waves-light btn btn-large vk-color",attrs:{"type":"submit"}},[_c('i',{staticClass:"material-icons left"},[_vm._v("navigate_next")]),_vm._v("Перейти к редактированию")])}]
 __vue__options__._scopeId = "data-v-347b5262"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16406,6 +16422,23 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],39:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".preloader-wrapper {\n  top: 50%;\n  left: 50%;\n  margin: -32px;\n  position: fixed;\n}")
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"preloader-wrapper big active"},[_c('div',{staticClass:"spinner-layer spinner-blue"},[_c('div',{staticClass:"circle-clipper left"},[_c('div',{staticClass:"circle"})]),_c('div',{staticClass:"gap-patch"},[_c('div',{staticClass:"circle"})]),_c('div',{staticClass:"circle-clipper right"},[_c('div',{staticClass:"circle"})])])])}]
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-079fb3e7", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-079fb3e7", __vue__options__)
+  }
+})()}
+},{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],40:[function(require,module,exports){
 'use strict';
 
 var Vue = require('vue');
@@ -16460,13 +16493,14 @@ new Vue({
     store: new Vuex.Store(store)
 });
 
-},{"./components/App.vue":34,"./components/Constructor.vue":35,"./components/Groups.vue":37,"./components/InfoGroup.vue":38,"./store":40,"vue":31,"vue-router":30,"vuex":33}],40:[function(require,module,exports){
+},{"./components/App.vue":34,"./components/Constructor.vue":35,"./components/Groups.vue":37,"./components/InfoGroup.vue":38,"./store":41,"vue":31,"vue-router":30,"vuex":33}],41:[function(require,module,exports){
 'use strict';
 
 var axios = require('axios');
 
 module.exports = {
   state: {
+    load: false,
     groups: {},
     fonts: {
       'BEBAS': 'Bebas Neue',
@@ -16475,13 +16509,11 @@ module.exports = {
     },
     bars: [{
       progress: 'iVBORw0KGgoAAAANSUhEUgAAAZ8AAABBCAYAAAAOoal/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAACkElEQVR4Xu3cQW7iQBAFUE6TRW7HNXKMbHNIxuWkrTYuwIBdEsN70pegpCRe8VVth8PpdNojn0O+RETkpXMckn3GP510+EDiAvsL/hkCwOv7HtJ/vsdykfXAXUmHK9O2m7gwAN5DLBfx2f/UVpQOb6SVju0G4L3F8vHQJpQOryT+iNIBoGmb0F0llA6T2HYAuCb6YXUBpcOz2HYAWGP1FpQOuygeAO51cwtKh39RPAA86moBpcMhigeAZ8URXNYxF8snfgAAnnFx+1kMhth6ANhKWkCzN0MUDwBbWxy/zd4McdwGwNYW209fPLYeAPYSX8WTlo+tB4A9TV9G2pcPAOxpuvfTiifaCAD2NN37aeXjyA2ACuP208oHACpM5fMxvgWA/U3l434PAFXGR67d7wGg2lH5AFDtS/kAUE35AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUG4sn+PvawAocYzy+fh9DQC7+x5yiPKJAECFuNUzlY/7PgBUmJWP+z4AVIi+mconAgB7Gu/3RPrycfQGwJ7GI7dIXz6O3gDYy8+QzyGL8onESgQAW5u2nkhfPJFopWgnANjKbOuJ9MXT4vgNgK0siicye9PF8RsAWxgfrT7PYvAXx28APGt6tPo86fAvCgiAR6XHbS3psIsCAuBeV4snkg7PooAAWCO6Ih6pvlo8kXSYJH5R/EIlBEDm5rbTJx1eiS0IgHPxYMHq4omkwxuxBQEQonTSR6lvJR2uTCsh/xME8D7afZ2HSqclHT6QuIi4GGUE8H9pZdNy1/HapaTDDdKXkYiIvG42KZt5Tod/OGkUGYvStAgAAAAASUVORK5CYII=',
-      stand: 'iVBORw0KGgoAAAANSUhEUgAAAZ8AAABBCAYAAAAOoal/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAACkElEQVR4Xu3cQW7iQBAFUE6TRW7HNXKMbHNIxuWkrTYuwIBdEsN70pegpCRe8VVth8PpdNojn0O+RETkpXMckn3GP510+EDiAvsL/hkCwOv7HtJ/vsdykfXAXUmHK9O2m7gwAN5DLBfx2f/UVpQOb6SVju0G4L3F8vHQJpQOryT+iNIBoGmb0F0llA6T2HYAuCb6YXUBpcOz2HYAWGP1FpQOuygeAO51cwtKh39RPAA86moBpcMhigeAZ8URXNYxF8snfgAAnnFx+1kMhth6ANhKWkCzN0MUDwBbWxy/zd4McdwGwNYW209fPLYeAPYSX8WTlo+tB4A9TV9G2pcPAOxpuvfTiifaCAD2NN37aeXjyA2ACuP208oHACpM5fMxvgWA/U3l434PAFXGR67d7wGg2lH5AFDtS/kAUE35AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUE75AFBO+QBQTvkAUG4sn+PvawAocYzy+fh9DQC7+x5yiPKJAECFuNUzlY/7PgBUmJWP+z4AVIi+mconAgB7Gu/3RPrycfQGwJ7GI7dIXz6O3gDYy8+QzyGL8onESgQAW5u2nkhfPJFopWgnANjKbOuJ9MXT4vgNgK0siicye9PF8RsAWxgfrT7PYvAXx28APGt6tPo86fAvCgiAR6XHbS3psIsCAuBeV4snkg7PooAAWCO6Ih6pvlo8kXSYJH5R/EIlBEDm5rbTJx1eiS0IgHPxYMHq4omkwxuxBQEQonTSR6lvJR2uTCsh/xME8D7afZ2HSqclHT6QuIi4GGUE8H9pZdNy1/HapaTDDdKXkYiIvG42KZt5Tod/OGkUGYvStAgAAAAASUVORK5CYII=',
-      border: 5,
+      stand: null,
+      border: 0,
       x: 300,
       y: 300,
       angle: 0,
-      stand_color: '#FF3300',
-      progress_color: '#FFFFFF',
       w: 300,
       h: 31
     }, {
@@ -16503,6 +16535,9 @@ module.exports = {
     },
     removeGroup: function removeGroup(state, gid) {
       state.groups.$remove(gid);
+    },
+    load: function load(state, v) {
+      state.load = v;
     }
   },
   actions: {
@@ -16511,11 +16546,13 @@ module.exports = {
       return Promise.resolve().then(function () {
         commit = _ref.commit;
         state = _ref.state;
+
+        commit('load', true);
         return axios.get(state.api + '/groups_list?uid=' + state.uid);
       }).then(function (_resp) {
         resp = _resp;
 
-        console.log(resp);
+        commit('load', false);
         commit('setGroups', resp.data);
       });
     },
@@ -16526,25 +16563,30 @@ module.exports = {
         state = _ref2.state;
         gid = _ref3.gid;
         cb = _ref3.cb;
+
+        commit('load', true);
         return axios.get(state.api + ('/group_info?uid=' + state.uid + '&gid=' + gid));
       }).then(function (_resp) {
         resp = _resp;
 
         commit('setGroup', resp.data);
         cb(resp.data);
+        commit('load', false);
       });
     },
     uploadData: function uploadData(_ref4, data) {
-      var comit, state, resp;
+      var commit, state, resp;
       return Promise.resolve().then(function () {
-        comit = _ref4.comit;
+        commit = _ref4.commit;
         state = _ref4.state;
 
         data.uid = state.uid;
-        console.log(data);
+        commit('load', true);
         return axios.post(state.api + '/update_group', data);
       }).then(function (_resp) {
         resp = _resp;
+
+        commit('load', false);
       });
     },
     removeGroup: function removeGroup(_ref5, gid) {
@@ -16552,14 +16594,17 @@ module.exports = {
       return Promise.resolve().then(function () {
         commit = _ref5.commit;
         state = _ref5.state;
+
+        commit('load', true);
         return axios.post(state.api + '/remove_group', { gid: gid, uid: state.uid });
       }).then(function (_resp) {
         resp = _resp;
 
         commit('removeGroup', gid);
+        commit('load', false);
       });
     }
   }
 };
 
-},{"axios":1}]},{},[39]);
+},{"axios":1}]},{},[40]);

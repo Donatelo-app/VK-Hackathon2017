@@ -47,6 +47,6 @@
     margin: 0 25px;
   }
   .container {
-    margin-top: 50px;
+    margin: 50px auto;
   }
 </style>

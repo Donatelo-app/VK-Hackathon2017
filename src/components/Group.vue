@@ -5,11 +5,11 @@
           <img :src="'data:image/png;base64,' + image">
         </div>
       </router-link>
-      <div class="card-content">
+      <!-- <div class="card-content">
         <span class="card-title activator grey-text text-darken-4">OXXXYMIRON OFFICIAL
           <i class="material-icons right waves-effect" id="remove" @click="removeGroup">close</i>
         </span>
-      </div>
+      </div> -->
   </div>
 </template>
 

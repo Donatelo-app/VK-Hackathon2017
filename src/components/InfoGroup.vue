@@ -2,7 +2,14 @@
   <div id="create-group">
     <nav>
       <div class="nav-wrapper vk-color">
-        <p class="flow-text">Базовая информация о группе:</p>
+        <div class="row">
+          <div class="col s1" style="text-align: center;">
+            <router-link :to="'groups'"><i class="material-icons">apps</i></router-link>
+          </div>
+          <div class="col s11">
+            <p class="flow-text" style="margin: 0;">Базовая информация о группе:</p>
+          </div>
+        </div>
       </div>
     </nav>
 

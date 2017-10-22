@@ -2,7 +2,14 @@
   <div id="constructor">
     <nav>
       <div class="nav-wrapper vk-color">
-        <p class="flow-text">Редактор обложки:</p>
+        <div class="row">
+          <div class="col s1" style="text-align: center;">
+            <router-link :to="'groups'"><i class="material-icons">apps</i></router-link>
+          </div>
+          <div class="col s11">
+            <p class="flow-text" style="margin: 0;">Редактор обложки:</p>
+          </div>
+        </div>
       </div>
     </nav>
     <canvas id="playground"></canvas>
@@ -81,11 +88,11 @@
           </div>
         </div>
         <div class="col s7">
-          <div class="card-panel hoverable">
+          <!-- <div class="card-panel hoverable">
             <input type="file" class="select-image" editCurrentProgressBar>
             <i class="material-icons">mode_edit</i>
             <p>Заменить исходную картинку</p>
-          </div>
+          </div> -->
         </div>
         <div class="col s3">
           <div @click="removeObject" class="card-panel hoverable">
@@ -369,7 +376,7 @@
     cursor: pointer;
     height: 150px;
     text-align: center;
-    background: -webkit-linear-gradient(#5e81a8, #b660bb);
+    background: #fff -webkit-linear-gradient(#5e81a8, #b660bb);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
