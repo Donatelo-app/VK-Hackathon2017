@@ -16124,7 +16124,7 @@ module.exports = {
         });
       }
 
-      this.$store.dispatch('uploadData', data);
+      this.$store.dispatch('uploadData', { data, cb: () => Materialize.toast('Обложка сохранилась', 1000) });
     },
 
     addTextNode(data) {
@@ -16261,7 +16261,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72446a58", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-72446a58", __vue__options__)
+    hotAPI.reload("data-v-72446a58", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-color/dist/vue-color.min.js":28,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],36:[function(require,module,exports){
@@ -16581,7 +16581,7 @@ module.exports = {
         resp = _resp;
 
         commit('load', false);
-        data.cb(data.data.gid);
+        data.cb && data.cb(data.data.gid);
       });
     },
     removeGroup: function removeGroup(_ref5, gid) {

@@ -65,7 +65,7 @@ module.exports = {
       console.log(data);
       let resp = await axios.post(state.api + '/update_group', data.data);
       commit('load', false);
-      data.cb(data.data.gid);
+      data.cb && data.cb(data.data.gid);
     },
     async removeGroup({commit, state}, gid) {
       commit('load', true);

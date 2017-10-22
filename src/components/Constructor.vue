@@ -226,7 +226,7 @@
           });
         }
 
-        this.$store.dispatch('uploadData', data);
+        this.$store.dispatch('uploadData', {data, cb: () => Materialize.toast('Обложка сохранилась', 1000)});
       },
 
       addTextNode(data) {
