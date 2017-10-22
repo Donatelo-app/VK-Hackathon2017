@@ -158,22 +158,16 @@
     },
     methods: {
       addCustomProgressBar(e) {
-        console.log(e)
-
         var files = e.target.files || e.dataTransfer.files;
         if(!files.length) return;
 
-        console.log('dfdsf')
-        console.log(files)
-
         var reader = new FileReader();
         reader.onload = (e) => {
-          console.log(e.target)
           this.addProgressBar({
             progress: e.target.result,
             stand: null,
-            x: 300,
-            y: 300,
+            x: 100,
+            y: 100,
             border: 0,
             angle: 0,
             w: 100,
@@ -264,8 +258,8 @@
         let br = data.border || 0;
         let w = data.w  || 300;
         let h = data.h  || 30;
-        let x = data.x || 150;
-        let y = data.y || 150;
+        let x = data.x || 50;
+        let y = data.y || 50;
         let src_progress = data.progress;
         let src_stand = data.stand != null ? data.stand : 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAADUlEQVQYV2P4//8/AwAI/AL+iF8G4AAAAABJRU5ErkJggg==';
 

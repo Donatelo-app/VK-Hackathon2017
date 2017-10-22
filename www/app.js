@@ -15988,7 +15988,7 @@ module.exports = index;
 
 }).call(this,require('_process'))
 },{"_process":27}],34:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n  background: #dfe3e6;\n}\n.vk-color {\n  background: #5e81a8 !important;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("body {\n  overflow-x: hidden;\n  background: #dfe3e6;\n}\n.vk-color {\n  background: #5e81a8 !important;\n}\n.slide-leave-active,\n.slide-enter-active {\n  transition: .4s;\n}\n.slide-enter {\n  transform: translate(100%, 0);\n}\n.slide-leave-to {\n  transform: translate(-100%, 0);\n}")
 ;(function(){
 
 
@@ -16007,7 +16007,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"width":"720px","height":"580px","overflow-y":"auto","overflow-x":"hidden"},attrs:{"id":"app"}},[_c('router-view'),_vm._v(" "),_c('preload',{directives:[{name:"show",rawName:"v-show",value:(_vm.load),expression:"load"}]})],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"width":"100vw","overflow-y":"auto","overflow-x":"hidden"},attrs:{"id":"app"}},[_c('transition',{attrs:{"name":"slide"}},[_c('router-view')],1),_vm._v(" "),_c('preload',{directives:[{name:"show",rawName:"v-show",value:(_vm.load),expression:"load"}]})],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16056,22 +16056,16 @@ module.exports = {
   },
   methods: {
     addCustomProgressBar(e) {
-      console.log(e);
-
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
 
-      console.log('dfdsf');
-      console.log(files);
-
       var reader = new FileReader();
       reader.onload = e => {
-        console.log(e.target);
         this.addProgressBar({
           progress: e.target.result,
           stand: null,
-          x: 300,
-          y: 300,
+          x: 100,
+          y: 100,
           border: 0,
           angle: 0,
           w: 100,
@@ -16162,8 +16156,8 @@ module.exports = {
       let br = data.border || 0;
       let w = data.w || 300;
       let h = data.h || 30;
-      let x = data.x || 150;
-      let y = data.y || 150;
+      let x = data.x || 50;
+      let y = data.y || 50;
       let src_progress = data.progress;
       let src_stand = data.stand != null ? data.stand : 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAADUlEQVQYV2P4//8/AwAI/AL+iF8G4AAAAABJRU5ErkJggg==';
 
@@ -16271,7 +16265,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":31,"vue-color/dist/vue-color.min.js":28,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],36:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#remove {\n  z-index: 10000;\n}\n.card, .card-panel {\n  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14);\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#remove {\n  z-index: 10000;\n}\n.card, .card-panel {\n  background: #fff;\n  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14);\n}")
 ;(function(){
 
 
@@ -16361,22 +16355,21 @@ module.exports = {
   },
   methods: {
     createGroup() {
-      this.$store.dispatch('uploadData', {
-        gid: this.groupId,
-        info: {
-          token: this.tokenGroup,
-          cover: {
-            total: this.total,
-            background: this.image,
-            views: []
-          },
-          wallets: {
-            bitcoin: this.bitcoinWallet,
-            tinkoff: this.tinkoffWallet
+      this.$store.dispatch('uploadData', { data: {
+          gid: this.groupId,
+          info: {
+            token: this.tokenGroup,
+            cover: {
+              total: this.total,
+              background: this.image,
+              views: []
+            },
+            wallets: {
+              bitcoin: this.bitcoinWallet,
+              tinkoff: this.tinkoffWallet
+            }
           }
-        }
-      });
-      this.$router.push('edit?gid=' + this.gid);
+        }, cb: gid => this.$router.push('edit?gid=' + gid) });
     },
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
@@ -16422,7 +16415,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":31,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],39:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".preloader-wrapper {\n  top: 50%;\n  left: 50%;\n  margin: -32px;\n  position: fixed;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".preloader-wrapper {\n  top: 50%;\n  left: 50%;\n  z-index: 100000000;\n  margin: -32px;\n  position: fixed;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
@@ -16580,13 +16573,15 @@ module.exports = {
         commit = _ref4.commit;
         state = _ref4.state;
 
-        data.uid = state.uid;
+        data.data.uid = state.uid;
         commit('load', true);
-        return axios.post(state.api + '/update_group', data);
+        console.log(data);
+        return axios.post(state.api + '/update_group', data.data);
       }).then(function (_resp) {
         resp = _resp;
 
         commit('load', false);
+        data.cb(data.data.gid);
       });
     },
     removeGroup: function removeGroup(_ref5, gid) {

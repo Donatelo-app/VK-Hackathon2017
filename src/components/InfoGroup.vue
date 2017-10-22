@@ -85,7 +85,7 @@
     },
     methods: {
       createGroup() {
-        this.$store.dispatch('uploadData', {
+        this.$store.dispatch('uploadData', {data: {
           gid: this.groupId,
           info: {
             token: this.tokenGroup,
@@ -99,8 +99,7 @@
               tinkoff: this.tinkoffWallet,
             }
           }
-        });
-        this.$router.push('edit?gid=' + this.gid);
+        }, cb: (gid) => this.$router.push('edit?gid=' + gid)});
       },
       onFileChange(e) {
         var files = e.target.files || e.dataTransfer.files;

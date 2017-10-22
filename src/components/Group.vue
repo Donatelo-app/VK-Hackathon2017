@@ -29,6 +29,7 @@
     z-index: 10000;
   }
   .card, .card-panel {
+    background: #fff;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14);
   }
 </style>

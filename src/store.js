@@ -60,10 +60,12 @@ module.exports = {
       commit('load', false);
     },
     async uploadData({commit, state}, data) {
-      data.uid = state.uid;
+      data.data.uid = state.uid;
       commit('load', true);
-      let resp = await axios.post(state.api + '/update_group', data);
+      console.log(data);
+      let resp = await axios.post(state.api + '/update_group', data.data);
       commit('load', false);
+      data.cb(data.data.gid);
     },
     async removeGroup({commit, state}, gid) {
       commit('load', true);

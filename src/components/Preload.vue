@@ -16,6 +16,7 @@
   .preloader-wrapper {
     top: 50%;
     left: 50%;
+    z-index: 100000000;
     margin: -32px;
     position: fixed;
   }

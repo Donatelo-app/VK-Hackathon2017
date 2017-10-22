@@ -1,6 +1,8 @@
 <template>
-  <div id="app" style="width:720px; height:580px; overflow-y: auto; overflow-x: hidden;">
-    <router-view></router-view>
+  <div id="app" style="width: 100vw; overflow-y: auto; overflow-x: hidden;">
+    <transition name="slide">
+      <router-view></router-view>
+    </transition>
     <preload v-show="load"></preload>
   </div>
 </template>
@@ -25,5 +27,15 @@
   }
   .vk-color {
     background: #5e81a8 !important;
+  }
+  .slide-leave-active,
+  .slide-enter-active {
+    transition: .4s;
+  }
+  .slide-enter {
+    transform: translate(100%, 0);
+  }
+  .slide-leave-to {
+    transform: translate(-100%, 0);
   }
 </style>
