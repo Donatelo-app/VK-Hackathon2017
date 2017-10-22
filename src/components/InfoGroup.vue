@@ -67,6 +67,7 @@
         gid: this.$route.query.gid,
         groupId: '',
         bitcoinWallet: '',
+        tinkoffWallet: '',
         total: 50000
       }
     },
@@ -87,11 +88,12 @@
               views: []
             },
             wallets: {
-              bitcoin: this.bitcoin,
-              tinkoff: this.tinkoff,
+              bitcoin: this.bitcoinWallet,
+              tinkoff: this.tinkoffWallet,
             }
           }
         });
+        this.$router.push('edit?gid=' + this.gid);
       },
       onFileChange(e) {
         var files = e.target.files || e.dataTransfer.files;
@@ -107,7 +109,6 @@
     mounted() {
       if(this.$route.query.gid) {
         let group = this.$store.state.group;
-        console.log(group.cover);
         this.image = 'data:image/png;base64,' + group.cover.background;
         $('#preview-image').css('backgroundImage', this.getUrlImage);
         this.tokenGroup = group.token;

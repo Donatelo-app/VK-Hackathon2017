@@ -15,6 +15,7 @@ module.exports = {
         border: 5,
         x: 300,
         y: 300,
+        angle: 0,
         stand_color: '#FF3300',
         progress_color: '#FFFFFF',
         w: 300,
