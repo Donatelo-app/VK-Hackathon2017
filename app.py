@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_cors import CORS
 from base import Base
 import json
@@ -105,7 +105,7 @@ def update_group():
 
 @app.route("/")
 def index():
-	return "Hello world", 200
+	return render_template('index.html')
 
 
 @app.route("/update")
