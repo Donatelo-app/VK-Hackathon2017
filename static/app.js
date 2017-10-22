@@ -16007,7 +16007,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('router-view'),_vm._v(" "),_c('preload',{directives:[{name:"show",rawName:"v-show",value:(_vm.load),expression:"load"}]})],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"width":"720px","height":"580px","overflow-y":"auto","overflow-x":"hidden"},attrs:{"id":"app"}},[_c('router-view'),_vm._v(" "),_c('preload',{directives:[{name:"show",rawName:"v-show",value:(_vm.load),expression:"load"}]})],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -16267,7 +16267,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-72446a58", __vue__options__)
   } else {
-    hotAPI.reload("data-v-72446a58", __vue__options__)
+    hotAPI.rerender("data-v-72446a58", __vue__options__)
   }
 })()}
 },{"vue":31,"vue-color/dist/vue-color.min.js":28,"vue-hot-reload-api":29,"vueify/lib/insert-css":32}],36:[function(require,module,exports){
