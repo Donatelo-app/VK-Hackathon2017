@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" style="width:720px; height:580px; overflow-y: auto; overflow-x: hidden;">
     <router-view></router-view>
     <preload v-show="load"></preload>
   </div>
